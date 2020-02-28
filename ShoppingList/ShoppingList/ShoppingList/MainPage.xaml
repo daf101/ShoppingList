@@ -7,6 +7,13 @@
             mc:Ignorable="d"
              x:Class="ShoppingList.MainPage">
 
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     Name="Add"
+                     Icon=""
+                     Clicked="Add_Clicked"/>
+    </TabbedPage.ToolbarItems>
+
     <local:ShoppingListPage Title="Shopping List"
                             />
     <local:UserPage Title="User"/>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace ShoppingList
@@ -16,6 +17,8 @@ namespace ShoppingList
         public ShoppingListPage()
         {
             InitializeComponent();
+            // Stops the ListView from going into the Status Bar:
+            On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 
         protected override async void OnAppearing()

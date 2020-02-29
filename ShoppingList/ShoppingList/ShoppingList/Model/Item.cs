@@ -38,6 +38,17 @@ namespace ShoppingList.Model
 
             return items;
         }
+
+        public static async void Put(Item item)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string uri = Constants.ITEM + item.name;
+                var jsonString = "{\"active\":1}";
+                HttpContent httpContent = new StringContent(jsonString);
+                var response = await client.PutAsync(uri, httpContent);
+            }
+        }
     }
 
     public class Response

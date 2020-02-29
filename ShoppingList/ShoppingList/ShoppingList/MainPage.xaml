@@ -8,10 +8,8 @@
              x:Class="ShoppingList.MainPage">
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="Add"
-                     Name="Add"
-                     Icon=""
-                     Clicked="Add_Clicked"/>
+        <ToolbarItem Text="Add"                    
+                     Command="{Binding NavCommand}"/> 
     </TabbedPage.ToolbarItems>
 
     <local:ShoppingListPage Title="Shopping List"

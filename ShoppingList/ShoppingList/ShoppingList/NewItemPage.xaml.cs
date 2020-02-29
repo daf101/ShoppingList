@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingList.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,12 @@ namespace ShoppingList
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewItemPage : ContentPage
     {
+        NewItemVM viewModel;
         public NewItemPage()
         {
             InitializeComponent();
+            viewModel = new NewItemVM();
+            BindingContext = viewModel;
         }
     }
 }

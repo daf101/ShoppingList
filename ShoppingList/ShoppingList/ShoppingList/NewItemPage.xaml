@@ -5,11 +5,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ShoppingList.NewItemPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <StackLayout VerticalOptions="Center"
+                 Margin="20,0">
+
+        <Entry x:Name="emailEntry"
+               Placeholder="Milk etc"
+               Keyboard="Email"
+               />
+        <Button x:Name="LoginButton" 
+                Margin="0,50,0,0"              
+                Text="Add To Shopping List"
+                />
+        
+    </StackLayout>
 </ContentPage>

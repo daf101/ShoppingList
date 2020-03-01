@@ -15,7 +15,7 @@ namespace ShoppingList.Model
         public string name { get; set; }
         public int active { get; set; }
 
-        public async static Task<List<Item>> GetItems()
+        public async static Task<List<Item>> GetItems() 
         {
             List<Item> items = new List<Item>();
 

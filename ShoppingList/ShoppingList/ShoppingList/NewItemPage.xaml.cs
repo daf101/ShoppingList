@@ -1,4 +1,5 @@
-﻿using ShoppingList.ViewModel;
+﻿using ShoppingList.Model;
+using ShoppingList.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,14 @@ namespace ShoppingList
             InitializeComponent();
             viewModel = new NewItemVM();
             BindingContext = viewModel;
+        }
+
+        private void AddButton_Clicked(object sender, EventArgs e)
+        {
+            Item item = new Item();
+            item.active = 1;
+            item.name = itemEntry.Text;
+            Item.Put(item);
         }
     }
 }

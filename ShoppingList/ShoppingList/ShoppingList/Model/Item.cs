@@ -44,8 +44,12 @@ namespace ShoppingList.Model
             using (HttpClient client = new HttpClient())
             {
                 string uri = Constants.ITEM + item.name;
-                var jsonString = "{\"active\":1}";
+                //var jsonString = "{\"active\":1}";
+                //var jsonString = "{'active':1}";
+                var jsonString = JsonConvert.SerializeObject(new { active = 1});
                 HttpContent httpContent = new StringContent(jsonString);
+                httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
                 var response = await client.PutAsync(uri, httpContent);
             }
         }

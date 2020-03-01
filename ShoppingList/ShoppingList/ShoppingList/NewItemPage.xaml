@@ -8,13 +8,12 @@
     <StackLayout VerticalOptions="Center"
                  Margin="20,0">
 
-        <Entry x:Name="emailEntry"
-               Placeholder="Milk etc"
-               Keyboard="Email"
-               />
-        <Button x:Name="LoginButton" 
+        <Entry x:Name="itemEntry"
+               Placeholder="Milk etc"/>
+        <Button x:Name="AddButton" 
                 Margin="0,50,0,0"              
                 Text="Add To Shopping List"
+                Clicked="AddButton_Clicked"
                 />
         
     </StackLayout>

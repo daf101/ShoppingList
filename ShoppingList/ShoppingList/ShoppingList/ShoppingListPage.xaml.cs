@@ -28,7 +28,18 @@ namespace ShoppingList
             var items = await Item.GetItems();
 
             itemListView.ItemsSource = items;
+            
 
+        }
+
+        private void itemListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var selectedItem = itemListView.SelectedItem as Item;
+
+            if (selectedItem != null)
+            {
+                Navigation.PushAsync(new ItemDetailPage(selectedItem));
+            }
         }
     }
 }

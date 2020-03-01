@@ -1,0 +1,17 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ShoppingList.ItemDetailPage">
+    <StackLayout>
+
+        <Label x:Name="itemNameEntry"/>
+        <Button Text="Delete"
+                x:Name="deleteButton"
+                Clicked="deleteButton_Clicked"/>
+        <Button Text="Cancel"
+                x:Name="cancelButton"/>
+
+    </StackLayout>
+</ContentPage>

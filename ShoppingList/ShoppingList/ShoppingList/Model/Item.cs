@@ -2,6 +2,7 @@
 using ShoppingList.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,14 @@ namespace ShoppingList.Model
 
                     var itemRoot = JsonConvert.DeserializeObject<ItemRoot>(json);
 
-                    items = itemRoot.items as List<Item>;
+                    int itemSize = items.Count;
+
+                    var filteredItems = itemRoot.items.Where(item => item.active.Equals(1)).ToList();
+
+
+                    //items = itemRoot.items as List<Item>;
+                    items = filteredItems as List<Item>;
+
                 }
             } catch(Exception e)
             {
@@ -44,9 +52,7 @@ namespace ShoppingList.Model
             using (HttpClient client = new HttpClient())
             {
                 string uri = Constants.ITEM + item.name;
-                //var jsonString = "{\"active\":1}";
-                //var jsonString = "{'active':1}";
-                var jsonString = JsonConvert.SerializeObject(new { active = 1});
+                var jsonString = JsonConvert.SerializeObject(new { active = item.active});
                 HttpContent httpContent = new StringContent(jsonString);
                 httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 

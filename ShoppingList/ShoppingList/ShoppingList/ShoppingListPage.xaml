@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="ShoppingList.ShoppingListPage">
     <ListView x:Name="itemListView"
+              ItemSelected="itemListView_ItemSelected"
               Margin="20,0"
               HorizontalOptions="FillAndExpand">
         <ListView.ItemTemplate>

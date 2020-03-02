@@ -47,7 +47,7 @@ namespace ShoppingList.Model
             return items;
         }
 
-        public static async void Put(Item item)
+        public static async Task<HttpResponseMessage> Put(Item item)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -57,6 +57,8 @@ namespace ShoppingList.Model
                 httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
                 var response = await client.PutAsync(uri, httpContent);
+                //string responseBody = await response.Content.ReadAsStringAsync();
+                return response;
             }
         }
     }

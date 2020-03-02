@@ -21,9 +21,11 @@ namespace ShoppingList
         {
             InitializeComponent();
 
+            var assembly = typeof(MainPage);
+
             viewModel = new MainVM();
             BindingContext = viewModel;
-            
+            //ShoppingListTab.IconImageSource = ImageSource.FromResource("ShoppingList.Assets.Images.list- 100.png", assembly);
         }
     }
 }

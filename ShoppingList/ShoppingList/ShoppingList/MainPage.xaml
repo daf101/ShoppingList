@@ -9,11 +9,15 @@
 
     <TabbedPage.ToolbarItems>
         <ToolbarItem Text="Add"                    
+                     Icon="add.png"
                      Command="{Binding NavCommand}"/> 
     </TabbedPage.ToolbarItems>
 
-    <local:ShoppingListPage Title="Shopping List"
+    <local:ShoppingListPage x:Name="ShoppingListTab"
+                            Title="Shopping List"
+                            Icon="list.png"
                             />
-    <local:UserPage Title="User"/>
+    <local:UserPage Title="User"
+                    Icon="user.png"/>
 
 </TabbedPage>

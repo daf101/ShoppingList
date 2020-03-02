@@ -57,7 +57,6 @@ namespace ShoppingList.Model
                 httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
                 var response = await client.PutAsync(uri, httpContent);
-                //string responseBody = await response.Content.ReadAsStringAsync();
                 return response;
             }
         }

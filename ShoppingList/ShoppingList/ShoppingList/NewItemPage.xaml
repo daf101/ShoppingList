@@ -5,13 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ShoppingList.NewItemPage">
-    <StackLayout VerticalOptions="Center"
+    <StackLayout VerticalOptions="CenterAndExpand"
                  Margin="20,0">
 
         <Entry x:Name="itemEntry"
                Placeholder="Milk etc"/>
         <Button x:Name="AddButton" 
-                Margin="0,50,0,0"              
+                Margin="0,0,0,0"              
                 Text="Add To Shopping List"
                 Clicked="AddButton_Clicked"
                 />

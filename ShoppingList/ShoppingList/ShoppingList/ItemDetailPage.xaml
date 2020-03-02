@@ -4,14 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ShoppingList.ItemDetailPage">
-    <StackLayout>
+    <StackLayout
+        Padding="80">
 
-        <Label x:Name="itemNameEntry"/>
+        <Label x:Name="itemNameEntry"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+               HorizontalTextAlignment="Center"
+               FontSize="40"
+               />
         <Button Text="Delete"
                 x:Name="deleteButton"
                 Clicked="deleteButton_Clicked"/>
+
         <Button Text="Cancel"
-                x:Name="cancelButton"/>
+                x:Name="cancelButton"
+                Clicked="cancelButton_Clicked"/>
 
     </StackLayout>
 </ContentPage>

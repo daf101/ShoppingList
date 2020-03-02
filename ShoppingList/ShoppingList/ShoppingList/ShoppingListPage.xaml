@@ -13,22 +13,10 @@
             <DataTemplate>
                 <ViewCell>
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
+                       
                         <Label Text="{Binding name}"
-                                    FontAttributes="Bold"/>
-                        <Label Grid.Row="1"
-                                       TextColor="DodgerBlue"
-                                       Text=""/>
-                        <Label Grid.Column="1"
-                                       Text=""/>
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"/>
                     </Grid>
                 </ViewCell>
             </DataTemplate>

@@ -5,23 +5,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ShoppingList.ShoppingListPage">
-    <ListView x:Name="itemListView"
+    <StackLayout>
+        <ListView x:Name="itemListView"
               ItemSelected="itemListView_ItemSelected"
               Margin="20,0"
               HorizontalOptions="FillAndExpand"
               IsPullToRefreshEnabled="True">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Grid>
-                       
-                        <Label Text="{Binding name}"
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+
+                            <Label Text="{Binding name}"
                                FontAttributes="Bold"
                                VerticalOptions="Center"/>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
-    </ListView>
+        </ListView>
+    </StackLayout>
+    
 </ContentPage>

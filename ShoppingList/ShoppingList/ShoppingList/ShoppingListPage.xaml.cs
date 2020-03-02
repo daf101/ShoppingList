@@ -34,7 +34,15 @@ namespace ShoppingList
         private async void refresh()
         {
             var items = await Item.GetItems();
-            itemListView.ItemsSource = items;
+            int amountOfItems = items.Count;
+            if(items.Count == 0)
+            {
+                itemListView.IsVisible = false;
+            } else
+            {
+                itemListView.ItemsSource = items;
+            }
+            
         }
 
         private void itemListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

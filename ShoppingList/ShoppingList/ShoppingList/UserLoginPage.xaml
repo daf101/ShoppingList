@@ -27,12 +27,18 @@
                 Text="Login"
                 
                 />
+   
+            
         <Button x:Name="registerUserButton"
                 Text="Register"
                 HorizontalOptions="End"
                 />
 
-
+        <Button x:Name="skipLoginButton"
+                Text="Skip Login"
+                HorizontalOptions="End"
+                Clicked="skipLoginButton_Clicked"/>
+   
     </StackLayout>
 
 </ContentPage>

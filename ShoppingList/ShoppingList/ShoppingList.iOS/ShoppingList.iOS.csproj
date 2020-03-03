@@ -180,4 +180,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\emptycart1%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\groceries.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\groceries%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\groceries%403x.png" />
+  </ItemGroup>
 </Project>

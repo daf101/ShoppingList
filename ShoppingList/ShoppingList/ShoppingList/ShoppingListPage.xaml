@@ -28,10 +28,17 @@
             </ListView>
             <ScrollView IsVisible="False"
                         x:Name="emptyView"
-                       >
-                <Label Text="Looks like you don't have anything on the list!"
-                    
-                    />
+                        VerticalOptions="CenterAndExpand">
+                <StackLayout>
+                    <Label Text="Hmmm..."
+                           HorizontalOptions="Center"
+                           FontSize="40"/>
+                    <Image Source="emptycart1.png"
+                           HeightRequest="150"
+                           WidthRequest="150"/>
+                    <Label Text="Looks like you don't have any items on your list!"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
             </ScrollView>
             
 

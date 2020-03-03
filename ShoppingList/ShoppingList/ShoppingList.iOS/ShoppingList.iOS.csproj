@@ -162,4 +162,22 @@
   <ItemGroup>
     <BundleResource Include="Resources\add%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart1%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart1%403x.png" />
+  </ItemGroup>
 </Project>

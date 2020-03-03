@@ -11,7 +11,7 @@ namespace ShoppingList
             InitializeComponent();
 
             //MainPage = new MainPage();
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new UserLoginPage());
         }
 
         protected override void OnStart()

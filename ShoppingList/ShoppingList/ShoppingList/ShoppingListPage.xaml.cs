@@ -19,9 +19,10 @@ namespace ShoppingList
             InitializeComponent();
             // Stops the ListView from going into the Status Bar:
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
-            itemListView.RefreshCommand = new Command(() => {
+            
+            shoppingListRefreshView.Command = new Command(() => {
                 refresh();
-                itemListView.IsRefreshing = false;
+                shoppingListRefreshView.IsRefreshing = false;
             });
         }
 
@@ -38,8 +39,11 @@ namespace ShoppingList
             if(items.Count == 0)
             {
                 itemListView.IsVisible = false;
+                emptyView.IsVisible = true;
             } else
             {
+                itemListView.IsVisible = true;
+                emptyView.IsVisible = false;
                 itemListView.ItemsSource = items;
             }
             

@@ -25,14 +25,17 @@
         <Button x:Name="LoginButton" 
                 Margin="0,50,0,0"              
                 Text="Login"
-                
+                Clicked="LoginButton_Clicked_1"
                 />
-   
-            
+        <ActivityIndicator x:Name="loginLoading"
+                           IsRunning="True"
+                           IsVisible="False"/>
+               
         <Button x:Name="registerUserButton"
                 Text="Register"
                 HorizontalOptions="End"
                 />
+        
 
         <Button x:Name="skipLoginButton"
                 Text="Skip Login"

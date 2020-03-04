@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingList.Helpers;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,15 @@ namespace ShoppingList
             InitializeComponent();
 
             //MainPage = new MainPage();
-            MainPage = new NavigationPage(new UserLoginPage());
+            if (Constants.LOGON_REQUIRED)
+            {
+                MainPage = new NavigationPage(new UserLoginPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+            
         }
 
         protected override void OnStart()

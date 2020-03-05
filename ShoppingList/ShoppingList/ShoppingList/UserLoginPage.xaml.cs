@@ -53,5 +53,10 @@ namespace ShoppingList
             }
                     
         }
+
+        private void registerUserButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new UserRegisterPage());
+        }
     }
 }

@@ -34,7 +34,7 @@
         <Button x:Name="registerUserButton"
                 Text="Register"
                 HorizontalOptions="End"
-                />
+                Clicked="registerUserButton_Clicked"/>
         
 
         <Button x:Name="skipLoginButton"

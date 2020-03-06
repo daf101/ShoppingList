@@ -11,6 +11,7 @@ namespace ShoppingList.Helpers
         public const string GET_ALL_ITEMS = SERVER_HOST + "/items";
         public const string ITEM = SERVER_HOST + "/item/";
         public const string AUTH = SERVER_HOST + "/auth";
+        public const string REGISTER = SERVER_HOST + "/register";
 
         // Authentication Required (Used for earlier dev while API security is being built):
         public const bool LOGON_REQUIRED = true;

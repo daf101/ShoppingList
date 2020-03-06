@@ -10,18 +10,23 @@ namespace ShoppingList.Model
 {
     public class User
     {
-        public string Name { get; set; }
-        public string AppPassword { get; set; }
-        public string AccessToken { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        [JsonIgnore]
+        public string access_token { get; set; }
 
-        public User(string name, string appPassword, string accessToken)
+        public User(string username, string password, string access_token)
         {
-            Name = name;
-            AppPassword = appPassword;
-            AccessToken = accessToken;
+            this.username = username;
+            this.password = password;
+            this.access_token = access_token;
         }
 
-        
+        public User(string username, string password)
+        {
+            this.username = username;
+            this.password = password;
+        }
 
         public static async Task<User> Login(string name, string appPassword)
         {
@@ -45,13 +50,28 @@ namespace ShoppingList.Model
                     return new User("loginFailed", "loginFailed", userLoginResponse.description);
                 }
             }
-            
+        }
 
+        public static async Task Register(User newUser)
+        {
+            HttpResponseMessage response;
+            using (HttpClient client = new HttpClient())
+            {
 
-            
+                var jsonString = JsonConvert.SerializeObject(newUser);
+                HttpContent httpContent = new StringContent(jsonString);
+                httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                response = await client.PostAsync(Constants.REGISTER, httpContent);
+            }
+
+            return;
+
         }
     }
 
+
+    // May need a UserRegisterResponse class, or simply refactor this class to be 
+    // "Response" if it can handle both (I'm very sure it can):
     public class UserLoginResponse
     {
         public string access_token { get; set; }

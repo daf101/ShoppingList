@@ -1,4 +1,5 @@
 ﻿using Plugin.Toast;
+using ShoppingList.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,8 @@ namespace ShoppingList
 
         private void RegisterUserButton_Clicked(object sender, EventArgs e)
         {
-           
+
+            User newUser = new User(emailEntry.Text, passwordEntry.Text);
             // If one of the fields is empty, tell the user:
             if (passwordEntry.Text == null || confirmPasswordEntry.Text == null)
             {
@@ -33,6 +35,8 @@ namespace ShoppingList
                 CrossToastPopUp.Current.ShowToastError("Passwords do not match - Try again");
                 return;
             }
+
+            User.Register(newUser);
 
             return;
 

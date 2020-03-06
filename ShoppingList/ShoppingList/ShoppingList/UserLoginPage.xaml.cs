@@ -37,9 +37,9 @@ namespace ShoppingList
             loginLoading.IsVisible = true;
             User currentUser = await User.Login(emailEntry.Text, passwordEntry.Text);
 
-            if (currentUser.AccessToken == "Invalid credentials")
+            if (currentUser.access_token == "Invalid credentials")
             {
-                CrossToastPopUp.Current.ShowToastError(currentUser.AccessToken);
+                CrossToastPopUp.Current.ShowToastError(currentUser.access_token);
                 LoginButton.IsVisible = true;
                 loginLoading.IsVisible = false;
             } 
@@ -48,7 +48,7 @@ namespace ShoppingList
                 await Navigation.PushAsync(new MainPage());
                 LoginButton.IsVisible = true;
                 loginLoading.IsVisible = false;
-                CrossToastPopUp.Current.ShowToastSuccess("Welcome back, " + currentUser.Name.First().ToString().ToUpper() + currentUser.Name.Substring(1));
+                CrossToastPopUp.Current.ShowToastSuccess("Welcome back, " + currentUser.username.First().ToString().ToUpper() + currentUser.username.Substring(1));
 
             }
                     

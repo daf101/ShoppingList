@@ -26,18 +26,27 @@ namespace ShoppingList
 
         private async void AddButton_Clicked(object sender, EventArgs e)
         {
-            Item item = new Item();
-            item.active = 1;
-            item.name = itemEntry.Text;
-            HttpResponseMessage response = await Item.Put(item);
-
-            if (response.StatusCode.ToString() == "OK")
+            HttpResponseMessage response;
+            try
             {
-                // Great, the item was added. Letting the user know and going back to previous page:
-                await Navigation.PopAsync();
-                CrossToastPopUp.Current.ShowToastSuccess("Item inserted successfully");
+                Item item = new Item();
+                item.active = 1;
+                item.name = itemEntry.Text;
+                response = await Item.Put(item);
+                if (response.StatusCode.ToString() == "OK")
+                {
+                    // Great, the item was added. Letting the user know and going back to previous page:
+                    await Navigation.PopAsync();
+                    CrossToastPopUp.Current.ShowToastSuccess("Item inserted successfully");
 
-            } 
+                }
+            } catch
+            {
+                CrossToastPopUp.Current.ShowToastError("Can't connect. Check VPN/WiFi connectivity");
+            }
+            
+
+            
         }
     }
 }

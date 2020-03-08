@@ -1,26 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--There is a bug with iOS / UWP with regards to ScrollView nested within Refresh View: 
+    https://github.com/xamarin/Xamarin.Forms/issues/8617 -->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ShoppingList.ShoppingListPage">
-    <ListView x:Name="itemListView"
-              ItemSelected="itemListView_ItemSelected"
-              Margin="20,0"
-              HorizontalOptions="FillAndExpand">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Grid>
-                       
-                        <Label Text="{Binding name}"
-                               FontAttributes="Bold"
-                               VerticalOptions="Center"/>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
+    <RefreshView x:Name="shoppingListRefreshView">
+        <StackLayout>
+            <ListView x:Name="itemListView"
+                  ItemSelected="itemListView_ItemSelected"
+                  Margin="20,0"
+                  HorizontalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Label Text="{Binding name}"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ScrollView IsVisible="False"
+                        x:Name="emptyView"
+                        VerticalOptions="CenterAndExpand">
+                <StackLayout>
+                    <Label Text="Hmmm..."
+                           HorizontalOptions="Center"
+                           FontSize="40"/>
+                    <Image Source="emptycart1.png"
+                           HeightRequest="150"
+                           WidthRequest="150"/>
+                    <Label Text="Looks like you don't have any items on your list!"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </ScrollView>
 
-    </ListView>
+            <ScrollView IsVisible="False"
+                        x:Name="noInternetView"
+                        VerticalOptions="CenterAndExpand"
+                        Margin="20,0">
+                <StackLayout>
+                    <Label Text="Hmmm..."
+                           HorizontalOptions="Center"
+                           FontSize="40"/>
+                    <Image Source="disconnected2.png"
+                           HeightRequest="70"
+                           WidthRequest="70"/>
+                    <Label Text="Can't seem to connect to the server... "
+                           HorizontalOptions="Center"/>
+                    <Label Text="Is your VPN connected maybe?"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Otherwise make sure you are connected"
+                           HorizontalOptions="Center"/>
+                    <Label Text=" to NotSoSlowInternet WiFi"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </ScrollView>
+
+
+        </StackLayout>
+        
+    </RefreshView>
+
 </ContentPage>

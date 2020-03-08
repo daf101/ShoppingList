@@ -1,4 +1,6 @@
-﻿using ShoppingList.ViewModel.Commands;
+﻿using Plugin.Toast;
+using ShoppingList.Model;
+using ShoppingList.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -21,6 +21,8 @@ namespace ShoppingList
         {
             InitializeComponent();
 
+            var assembly = typeof(MainPage);
+
             viewModel = new MainVM();
             BindingContext = viewModel;
             

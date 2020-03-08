@@ -61,6 +61,9 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -131,5 +134,68 @@
       <Project>{957EDB0F-7375-4990-A9A9-EAA43F53C01D}</Project>
       <Name>ShoppingList</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\list%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\list%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\user%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\user%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\add%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\add%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart1%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emptycart1%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\groceries.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\groceries%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\groceries%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\disconnected%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\disconnected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\disconnected%402x.png" />
   </ItemGroup>
 </Project>

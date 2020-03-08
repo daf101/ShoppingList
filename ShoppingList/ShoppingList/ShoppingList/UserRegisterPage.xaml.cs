@@ -19,7 +19,7 @@ namespace ShoppingList
             InitializeComponent();
         }
 
-        private void RegisterUserButton_Clicked(object sender, EventArgs e)
+        private async void RegisterUserButton_Clicked(object sender, EventArgs e)
         {
 
             User newUser = new User(emailEntry.Text, passwordEntry.Text);
@@ -36,8 +36,21 @@ namespace ShoppingList
                 return;
             }
 
-            User.Register(newUser);
+            RegisterUserButton.IsVisible = false;
+            registerLoading.IsVisible = true;
+            User isSuccessfull = await User.Register(newUser);
 
+            if (isSuccessfull.username == "registerFailed")
+            {
+                CrossToastPopUp.Current.ShowToastError(isSuccessfull.access_token);
+            } 
+            else
+            {
+                await Navigation.PopAsync();
+                CrossToastPopUp.Current.ShowToastSuccess(isSuccessfull.username + " created successfully");
+            }
+            RegisterUserButton.IsVisible = true;
+            registerLoading.IsVisible = false;
             return;
 
         }

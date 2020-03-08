@@ -52,20 +52,28 @@ namespace ShoppingList.Model
             }
         }
 
-        public static async Task Register(User newUser)
+        public static async Task<User> Register(User newUser)
         {
             HttpResponseMessage response;
+            UserLoginResponse registerMessage;
             using (HttpClient client = new HttpClient())
             {
-
                 var jsonString = JsonConvert.SerializeObject(newUser);
                 HttpContent httpContent = new StringContent(jsonString);
                 httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                 response = await client.PostAsync(Constants.REGISTER, httpContent);
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return newUser;
+                }
+                else
+                {
+                    registerMessage = JsonConvert.DeserializeObject<UserLoginResponse>(jsonResponse);
+                    return new User("registerFailed", "registerFailed", registerMessage.message);
+                }
             }
-
-            return;
-
         }
     }
 
@@ -76,5 +84,6 @@ namespace ShoppingList.Model
     {
         public string access_token { get; set; }
         public string description { get; set; }
+        public string message { get; set; }
     }
 }

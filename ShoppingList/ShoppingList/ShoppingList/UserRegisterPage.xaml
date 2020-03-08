@@ -28,7 +28,7 @@
                 Text="Register"
                 Clicked="RegisterUserButton_Clicked"/>
         
-            <ActivityIndicator x:Name="loginLoading"
+            <ActivityIndicator x:Name="registerLoading"
                            IsRunning="True"
                            IsVisible="False"/>
     </StackLayout>

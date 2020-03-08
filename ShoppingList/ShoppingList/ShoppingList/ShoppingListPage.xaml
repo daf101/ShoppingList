@@ -9,6 +9,7 @@
              mc:Ignorable="d"
              x:Class="ShoppingList.ShoppingListPage">
     <RefreshView x:Name="shoppingListRefreshView">
+        <ScrollView>
         <StackLayout>
             <ListView x:Name="itemListView"
                   ItemSelected="itemListView_ItemSelected"
@@ -65,6 +66,7 @@
 
 
         </StackLayout>
+        </ScrollView>
         
     </RefreshView>
 

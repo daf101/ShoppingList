@@ -9,28 +9,31 @@
              mc:Ignorable="d"
              x:Class="ShoppingList.ShoppingListPage">
     <RefreshView x:Name="shoppingListRefreshView">
-        <ScrollView>
-        <StackLayout>
-            <ListView x:Name="itemListView"
+        
+        
+            <StackLayout>
+                <ListView x:Name="itemListView"
                   ItemSelected="itemListView_ItemSelected"
                   Margin="20,0"
-                  HorizontalOptions="FillAndExpand">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Label Text="{Binding name}"
+                  HorizontalOptions="FillAndExpand"
+                  IsPullToRefreshEnabled="True"
+                          >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Label Text="{Binding name}"
                                    FontAttributes="Bold"
                                    VerticalOptions="Center"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ScrollView IsVisible="False"
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout IsVisible="False"
                         x:Name="emptyView"
                         VerticalOptions="CenterAndExpand">
-                <StackLayout>
                     <Label Text="Hmmm..."
                            HorizontalOptions="Center"
                            FontSize="40"/>
@@ -40,13 +43,11 @@
                     <Label Text="Looks like you don't have any items on your list!"
                            HorizontalOptions="Center"/>
                 </StackLayout>
-            </ScrollView>
 
-            <ScrollView IsVisible="False"
+                <StackLayout IsVisible="False"
                         x:Name="noInternetView"
                         VerticalOptions="CenterAndExpand"
                         Margin="20,0">
-                <StackLayout>
                     <Label Text="Hmmm..."
                            HorizontalOptions="Center"
                            FontSize="40"/>
@@ -62,12 +63,10 @@
                     <Label Text=" to NotSoSlowInternet WiFi"
                            HorizontalOptions="Center"/>
                 </StackLayout>
-            </ScrollView>
 
-
-        </StackLayout>
-        </ScrollView>
+            </StackLayout>
         
+
     </RefreshView>
 
 </ContentPage>

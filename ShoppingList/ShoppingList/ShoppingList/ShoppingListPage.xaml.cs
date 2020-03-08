@@ -1,4 +1,5 @@
-﻿using ShoppingList.Model;
+﻿using Plugin.Toast;
+using ShoppingList.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,14 +36,23 @@ namespace ShoppingList
         private async void refresh()
         {
             var items = await Item.GetItems();
-            int amountOfItems = items.Count;
-            if(items.Count == 0)
+            if (items.Count == 0)
             {
                 itemListView.IsVisible = false;
                 emptyView.IsVisible = true;
-            } else
+                noInternetView.IsVisible = false;
+            }
+            else if (items[0].name.Contains("Unable to resolve host"))
+            {
+                emptyView.IsVisible = false;
+                itemListView.IsVisible = false;
+                noInternetView.IsVisible = true;
+                CrossToastPopUp.Current.ShowToastError("Unable to connect to server");
+            }
+            else
             {
                 itemListView.IsVisible = true;
+                noInternetView.IsVisible = false;
                 emptyView.IsVisible = false;
                 itemListView.ItemsSource = items;
             }

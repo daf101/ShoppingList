@@ -40,7 +40,29 @@
                            HorizontalOptions="Center"/>
                 </StackLayout>
             </ScrollView>
-            
+
+            <ScrollView IsVisible="False"
+                        x:Name="noInternetView"
+                        VerticalOptions="CenterAndExpand"
+                        Margin="20,0">
+                <StackLayout>
+                    <Label Text="Hmmm..."
+                           HorizontalOptions="Center"
+                           FontSize="40"/>
+                    <Image Source="disconnected2.png"
+                           HeightRequest="70"
+                           WidthRequest="70"/>
+                    <Label Text="Can't seem to connect to the server... "
+                           HorizontalOptions="Center"/>
+                    <Label Text="Is your VPN connected maybe?"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Otherwise make sure you are connected"
+                           HorizontalOptions="Center"/>
+                    <Label Text=" to NotSoSlowInternet WiFi"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </ScrollView>
+
 
         </StackLayout>
         

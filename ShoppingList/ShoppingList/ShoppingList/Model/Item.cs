@@ -16,34 +16,32 @@ namespace ShoppingList.Model
         public string name { get; set; }
         public int active { get; set; }
 
+        public Item() {}
+        public Item(string name)
+        {
+            this.name = name;
+        }
+
         public async static Task<List<Item>> GetItems() 
         {
             List<Item> items = new List<Item>();
-
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    //client.Timeout = TimeSpan.FromSeconds(30);
                     var response = await client.GetAsync(Constants.GET_ALL_ITEMS);
                     var json = await response.Content.ReadAsStringAsync();
-
                     var itemRoot = JsonConvert.DeserializeObject<ItemRoot>(json);
-
                     int itemSize = items.Count;
-
                     var filteredItems = itemRoot.items.Where(item => item.active.Equals(1)).ToList();
-
-
-                    //items = itemRoot.items as List<Item>;
                     items = filteredItems as List<Item>;
-
                 }
-            } catch(Exception e)
+            } 
+            catch(Exception e)
             {
-                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error", e.Message, "Ok");
+                items.Add(new Item(e.Message));
             }
-            
-
             return items;
         }
 
@@ -55,9 +53,24 @@ namespace ShoppingList.Model
                 var jsonString = JsonConvert.SerializeObject(new { active = item.active});
                 HttpContent httpContent = new StringContent(jsonString);
                 httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
                 var response = await client.PutAsync(uri, httpContent);
                 return response;
+            }
+        }
+
+        public static async Task<bool> CanConnect()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(Constants.GET_ALL_ITEMS);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }
@@ -69,7 +82,6 @@ namespace ShoppingList.Model
 
     public class ItemRoot
     {
-        //public Response response { get; set; }
         public IList<Item> items { get; set; }
     }
 }

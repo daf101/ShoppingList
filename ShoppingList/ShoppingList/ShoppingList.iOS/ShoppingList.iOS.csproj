@@ -189,4 +189,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\groceries%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\disconnected%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\disconnected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\disconnected%402x.png" />
+  </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-
 <!--There is a bug with iOS / UWP with regards to ScrollView nested within Refresh View: 
     https://github.com/xamarin/Xamarin.Forms/issues/8617 -->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -8,32 +7,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ShoppingList.ShoppingListPage">
-    <RefreshView x:Name="shoppingListRefreshView">
-        
-        
-            <StackLayout>
-                <ListView x:Name="itemListView"
+    <StackLayout>
+        <ListView x:Name="itemListView"
                   ItemSelected="itemListView_ItemSelected"
                   Margin="20,0"
                   HorizontalOptions="FillAndExpand"
-                  IsPullToRefreshEnabled="True"
-                          >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Label Text="{Binding name}"
+                  IsPullToRefreshEnabled="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Label Text="{Binding name}"
                                    FontAttributes="Bold"
                                    VerticalOptions="Center"/>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-                <StackLayout IsVisible="False"
-                        x:Name="emptyView"
-                        VerticalOptions="CenterAndExpand">
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <RefreshView x:Name="emptyViewRefreshView"
+                     IsVisible="False"
+                     IsRefreshing="False"
+                     IsEnabled="True">
+            <ScrollView>
+                <StackLayout VerticalOptions="CenterAndExpand">
                     <Label Text="Hmmm..."
                            HorizontalOptions="Center"
                            FontSize="40"/>
@@ -43,11 +40,16 @@
                     <Label Text="Looks like you don't have any items on your list!"
                            HorizontalOptions="Center"/>
                 </StackLayout>
-
-                <StackLayout IsVisible="False"
-                        x:Name="noInternetView"
-                        VerticalOptions="CenterAndExpand"
-                        Margin="20,0">
+            </ScrollView>
+        </RefreshView>
+        <RefreshView x:Name="noInternetRefreshView"
+                     IsVisible="False"
+                     Margin="20,0"
+                     IsRefreshing="False"
+                     IsEnabled="True">
+            <ScrollView>
+                <StackLayout x:Name="noInternetView"
+                             VerticalOptions="CenterAndExpand">
                     <Label Text="Hmmm..."
                            HorizontalOptions="Center"
                            FontSize="40"/>
@@ -63,10 +65,7 @@
                     <Label Text=" to NotSoSlowInternet WiFi"
                            HorizontalOptions="Center"/>
                 </StackLayout>
-
-            </StackLayout>
-        
-
-    </RefreshView>
-
+            </ScrollView>
+        </RefreshView>
+    </StackLayout>
 </ContentPage>

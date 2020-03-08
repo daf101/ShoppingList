@@ -21,10 +21,14 @@ namespace ShoppingList
             // Stops the ListView from going into the Status Bar:
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
             
-            itemListView.RefreshCommand = new Command(() => {
+            Command refreshCommand = new Command(() => {
                 refresh();
-                shoppingListRefreshView.IsRefreshing = false;
             });
+
+            itemListView.RefreshCommand = refreshCommand;
+            noInternetRefreshView.Command = refreshCommand;
+            emptyViewRefreshView.Command = refreshCommand;
+
         }
 
         protected override void OnAppearing()
@@ -35,27 +39,32 @@ namespace ShoppingList
 
         private async void refresh()
         {
+            itemListView.IsRefreshing = true;
             var items = await Item.GetItems();
             if (items.Count == 0)
             {
+                emptyViewRefreshView.IsVisible = true;
                 itemListView.IsVisible = false;
-                emptyView.IsVisible = true;
-                noInternetView.IsVisible = false;
+                noInternetRefreshView.IsVisible = false;
+                emptyViewRefreshView.IsRefreshing = false;
             }
             else if (items[0].name.Contains("Unable to resolve host"))
             {
-                emptyView.IsVisible = false;
+                emptyViewRefreshView.IsVisible = false;
                 itemListView.IsVisible = false;
-                noInternetView.IsVisible = true;
+                noInternetRefreshView.IsVisible = true;
                 CrossToastPopUp.Current.ShowToastError("Unable to connect to server");
+                noInternetRefreshView.IsRefreshing = false;
             }
             else
             {
                 itemListView.IsVisible = true;
-                noInternetView.IsVisible = false;
-                emptyView.IsVisible = false;
+                noInternetRefreshView.IsVisible = false;
+                noInternetRefreshView.IsRefreshing = false;
+                emptyViewRefreshView.IsVisible = false;
                 itemListView.ItemsSource = items;
             }
+            itemListView.IsRefreshing = false;
             
         }
 

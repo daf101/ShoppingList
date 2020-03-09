@@ -39,7 +39,7 @@ namespace ShoppingList
 
         private async void refresh()
         {
-            itemListView.IsRefreshing = true;
+            //itemListView.IsRefreshing = true;
             var items = await Item.GetItems();
             if (items.Count == 0)
             {
@@ -47,6 +47,7 @@ namespace ShoppingList
                 itemListView.IsVisible = false;
                 noInternetRefreshView.IsVisible = false;
                 emptyViewRefreshView.IsRefreshing = false;
+                itemListView.IsRefreshing = false;
             }
             else if (items[0].name.Contains("Unable to resolve host"))
             {
@@ -55,6 +56,7 @@ namespace ShoppingList
                 noInternetRefreshView.IsVisible = true;
                 CrossToastPopUp.Current.ShowToastError("Unable to connect to server");
                 noInternetRefreshView.IsRefreshing = false;
+                itemListView.IsRefreshing = false;
             }
             else
             {
@@ -62,9 +64,11 @@ namespace ShoppingList
                 noInternetRefreshView.IsVisible = false;
                 noInternetRefreshView.IsRefreshing = false;
                 emptyViewRefreshView.IsVisible = false;
+                itemListView.IsRefreshing = false;
                 itemListView.ItemsSource = items;
+                
             }
-            itemListView.IsRefreshing = false;
+            
             
         }
 

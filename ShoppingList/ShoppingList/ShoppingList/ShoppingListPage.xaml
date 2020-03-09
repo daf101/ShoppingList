@@ -12,7 +12,8 @@
                   ItemSelected="itemListView_ItemSelected"
                   Margin="20,0"
                   HorizontalOptions="FillAndExpand"
-                  IsPullToRefreshEnabled="True">
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

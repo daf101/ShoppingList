@@ -23,9 +23,9 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>Shopping List</string>
+	<string>Shopping List-Dev</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.notsoslow.ShoppingList</string>
+	<string>com.notsoslow.ShoppingList-dev</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>

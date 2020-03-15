@@ -1,4 +1,5 @@
 ﻿using Plugin.Toast;
+using Rg.Plugins.Popup.Extensions;
 using ShoppingList.Model;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
+using Application = Xamarin.Forms.Application;
 
 namespace ShoppingList
 {
@@ -28,6 +30,10 @@ namespace ShoppingList
             itemListView.RefreshCommand = refreshCommand;
             noInternetRefreshView.Command = refreshCommand;
             emptyViewRefreshView.Command = refreshCommand;
+
+            MessagingCenter.Subscribe<App>((App)Application.Current, "ItemDetailPageFinished", (sender) => {
+                refresh();
+            });
 
         }
 
@@ -77,7 +83,8 @@ namespace ShoppingList
             var selectedItem = itemListView.SelectedItem as Item;
             if (selectedItem != null)
             {
-                Navigation.PushAsync(new ItemDetailPage(selectedItem));
+                Navigation.PushPopupAsync(new ItemDetailPage(selectedItem));
+                itemListView.SelectedItem = null; // de-select the row
             }
         }
     }

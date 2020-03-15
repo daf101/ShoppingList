@@ -198,4 +198,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\disconnected%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\forward%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\forward%403x.png" />
+  </ItemGroup>
 </Project>

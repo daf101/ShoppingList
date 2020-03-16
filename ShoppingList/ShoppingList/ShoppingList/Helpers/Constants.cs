@@ -14,6 +14,6 @@ namespace ShoppingList.Helpers
         public const string REGISTER = SERVER_HOST + "/register";
 
         // Authentication Required (Used for earlier dev while API security is being built):
-        public const bool LOGON_REQUIRED = false;
+        public const bool LOGON_REQUIRED = true;
     }
 }

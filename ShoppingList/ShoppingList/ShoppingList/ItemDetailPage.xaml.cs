@@ -66,12 +66,21 @@ namespace ShoppingList
         private void itemNameEntry_Completed(object sender, EventArgs e)
         {
             // Update item
+            updateItem();
             Navigation.PopPopupAsync();
         }
 
         private void updateButton_Clicked(object sender, EventArgs e)
         {
+            updateItem();
             Navigation.PopPopupAsync();
+        }
+
+        private async void updateItem()
+        {
+            SelectedItem.name = itemNameEntry.Text;
+            Item test = SelectedItem;
+            await Item.Put(SelectedItem);
         }
     }
 }

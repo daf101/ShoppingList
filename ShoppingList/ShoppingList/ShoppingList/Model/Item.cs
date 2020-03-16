@@ -17,6 +17,12 @@ namespace ShoppingList.Model
         public int active { get; set; }
 
         public Item() {}
+        public Item(int id, string name, int active) 
+        {
+            this.id = id;
+            this.name = name;
+            this.active = active;
+        }
         public Item(string name)
         {
             this.name = name;
@@ -49,12 +55,25 @@ namespace ShoppingList.Model
         {
             using (HttpClient client = new HttpClient())
             {
-                string uri = Constants.ITEM + item.name;
-                var jsonString = JsonConvert.SerializeObject(new { active = item.active});
+                string jsonString;
+                string uri;
+                if (item.id == 0)
+                {
+                    uri = Constants.ITEM + item.name;
+                    jsonString = JsonConvert.SerializeObject(new { active = item.active });
+                    
+                }
+                else
+                {
+                    uri = Constants.ITEM + item.id;
+                    jsonString = JsonConvert.SerializeObject(new { name = item.name, active = item.active });
+                }
+                
                 HttpContent httpContent = new StringContent(jsonString);
                 httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                 var response = await client.PutAsync(uri, httpContent);
                 return response;
+
             }
         }
 

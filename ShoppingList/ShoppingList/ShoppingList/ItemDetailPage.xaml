@@ -24,10 +24,11 @@
             HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
 
+
     <StackLayout
         VerticalOptions="End"
         Padding="5,5,5,5"
-        BackgroundColor="CadetBlue"
+        BackgroundColor="SteelBlue"
         Orientation="Vertical">
 
         <Label Text="Edit Item:"
@@ -57,8 +58,6 @@
 
         </StackLayout>
 
-        
-
         <StackLayout
             Orientation="Horizontal"
             HorizontalOptions="Center">
@@ -75,5 +74,6 @@
         </StackLayout>
         
     </StackLayout>
+        
     
 </pages:PopupPage>

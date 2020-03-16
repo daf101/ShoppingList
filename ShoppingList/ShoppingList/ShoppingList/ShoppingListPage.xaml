@@ -7,13 +7,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ShoppingList.ShoppingListPage">
-    <StackLayout>
-        <ListView x:Name="itemListView"
+
+    <AbsoluteLayout>
+
+        <ListView x:Name="itemListView" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0,0,1,1"
                   ItemSelected="itemListView_ItemSelected"
                   Margin="20,0"
                   HorizontalOptions="FillAndExpand"
                   IsPullToRefreshEnabled="True"
                   IsRefreshing="False">
+                  
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -30,43 +33,51 @@
                      IsVisible="False"
                      IsRefreshing="False"
                      IsEnabled="True">
-            <ScrollView>
-                <StackLayout VerticalOptions="CenterAndExpand">
-                    <Label Text="Hmmm..."
+                <ScrollView>
+                    <StackLayout VerticalOptions="CenterAndExpand">
+                        <Label Text="Hmmm..."
                            HorizontalOptions="Center"
                            FontSize="40"/>
-                    <Image Source="emptycart1.png"
+                        <Image Source="emptycart1.png"
                            HeightRequest="150"
                            WidthRequest="150"/>
-                    <Label Text="Looks like you don't have any items on your list!"
+                        <Label Text="Looks like you don't have any items on your list!"
                            HorizontalOptions="Center"/>
-                </StackLayout>
-            </ScrollView>
-        </RefreshView>
-        <RefreshView x:Name="noInternetRefreshView"
+                    </StackLayout>
+                </ScrollView>
+            </RefreshView>
+            <RefreshView x:Name="noInternetRefreshView"
                      IsVisible="False"
                      Margin="20,0"
                      IsRefreshing="False"
                      IsEnabled="True">
-            <ScrollView>
-                <StackLayout x:Name="noInternetView"
+                <ScrollView>
+                    <StackLayout x:Name="noInternetView"
                              VerticalOptions="CenterAndExpand">
-                    <Label Text="Hmmm..."
+                        <Label Text="Hmmm..."
                            HorizontalOptions="Center"
                            FontSize="40"/>
-                    <Image Source="disconnected2.png"
+                        <Image Source="disconnected2.png"
                            HeightRequest="70"
                            WidthRequest="70"/>
-                    <Label Text="Can't seem to connect to the server... "
+                        <Label Text="Can't seem to connect to the server... "
                            HorizontalOptions="Center"/>
-                    <Label Text="Is your VPN connected maybe?"
+                        <Label Text="Is your VPN connected maybe?"
                            HorizontalOptions="Center"/>
-                    <Label Text="Otherwise make sure you are connected"
+                        <Label Text="Otherwise make sure you are connected"
                            HorizontalOptions="Center"/>
-                    <Label Text=" to NotSoSlowInternet WiFi"
+                        <Label Text=" to NotSoSlowInternet WiFi"
                            HorizontalOptions="Center"/>
-                </StackLayout>
-            </ScrollView>
-        </RefreshView>
-    </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </RefreshView>
+        <ImageButton x:Name="yourname"
+                     BackgroundColor="Transparent"
+                Source="newitem.png"
+                IsVisible="True"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
+                     HeightRequest="100"
+                     WidthRequest="100"/>
+    </AbsoluteLayout>
 </ContentPage>

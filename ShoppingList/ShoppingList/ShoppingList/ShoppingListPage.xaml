@@ -73,11 +73,11 @@
             </RefreshView>
         <ImageButton x:Name="yourname"
                      BackgroundColor="Transparent"
-                Source="newitem.png"
-                IsVisible="True"
-                AbsoluteLayout.LayoutFlags="PositionProportional"
-                AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
-                     HeightRequest="100"
-                     WidthRequest="100"/>
+                     Source="newitem2.png"
+                     IsVisible="True"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     AbsoluteLayout.LayoutBounds=".95,.95,80,80"
+                     HeightRequest="50"
+                     WidthRequest="50"/>
     </AbsoluteLayout>
 </ContentPage>

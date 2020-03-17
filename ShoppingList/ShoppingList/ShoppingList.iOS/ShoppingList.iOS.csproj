@@ -207,4 +207,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\forward%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\newitem2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\newitem2%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\newitem2%403x.png" />
+  </ItemGroup>
 </Project>

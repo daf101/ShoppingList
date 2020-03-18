@@ -27,5 +27,12 @@ namespace ShoppingList
             BindingContext = viewModel;
             
         }
+
+        public async void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        {
+            string action = await DisplayActionSheet("Sort By", "Cancel", null, "Name");
+            MessagingCenter.Send<App>((App)Application.Current, "SortByNameSelected");
+        }
     }
+    
 }

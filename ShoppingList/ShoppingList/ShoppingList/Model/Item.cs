@@ -28,7 +28,7 @@ namespace ShoppingList.Model
             this.name = name;
         }
 
-        public async static Task<List<Item>> GetItems() 
+        public async static Task<List<Item>> GetItems(bool sortByName) 
         {
             List<Item> items = new List<Item>();
             try
@@ -40,7 +40,18 @@ namespace ShoppingList.Model
                     var json = await response.Content.ReadAsStringAsync();
                     var itemRoot = JsonConvert.DeserializeObject<ItemRoot>(json);
                     int itemSize = items.Count;
-                    var filteredItems = itemRoot.items.Where(item => item.active.Equals(1)).ToList();
+
+                    List<Item> filteredItems;
+                    if (sortByName)
+                    {
+                        //filteredItems = itemRoot.items.Where(item => item.active.Equals(1)).ToList();
+                        filteredItems = itemRoot.items.Where(item => item.active.Equals(1)).OrderBy(item => item.name).ToList();
+                    } 
+                    else
+                    {
+                        filteredItems = itemRoot.items.Where(item => item.active.Equals(1)).ToList();
+                    }
+                   
                     items = filteredItems as List<Item>;
                 }
             } 

@@ -8,9 +8,11 @@
              x:Class="ShoppingList.MainPage">
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="Add"                    
-                     Icon="add.png"
-                     Command="{Binding NavCommand}"/> 
+        
+        <ToolbarItem Text="Sort buy"                    
+                     IconImageSource="menu.png"
+                     Order="Primary"
+                     Clicked="ToolbarItem_Clicked_1"/>
     </TabbedPage.ToolbarItems>
 
     <local:ShoppingListPage x:Name="ShoppingListTab"

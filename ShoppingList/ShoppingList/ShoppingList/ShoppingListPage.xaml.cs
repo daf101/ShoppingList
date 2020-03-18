@@ -1,6 +1,7 @@
 ﻿using Plugin.Toast;
 using Rg.Plugins.Popup.Extensions;
 using ShoppingList.Model;
+using ShoppingList.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace ShoppingList
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShoppingListPage : ContentPage
     {
+
         public ShoppingListPage()
         {
             InitializeComponent();
@@ -34,6 +36,9 @@ namespace ShoppingList
             MessagingCenter.Subscribe<App>((App)Application.Current, "ItemDetailPageFinished", (sender) => {
                 refresh();
             });
+            MessagingCenter.Subscribe<App>((App)Application.Current, "SortByNameSelected", (sender) => {
+                refresh();
+            });
 
         }
 
@@ -43,10 +48,10 @@ namespace ShoppingList
             refresh();
         }
 
-        private async void refresh()
+        public async void refresh()
         {
             //itemListView.IsRefreshing = true;
-            var items = await Item.GetItems();
+            var items = await Item.GetItems(true);
             if (items.Count == 0)
             {
                 emptyViewRefreshView.IsVisible = true;

@@ -29,7 +29,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <RefreshView x:Name="emptyViewRefreshView"
+        <RefreshView x:Name="emptyViewRefreshView" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0,0,1,1"
                      IsVisible="False"
                      IsRefreshing="False"
                      IsEnabled="True">
@@ -46,7 +46,7 @@
                     </StackLayout>
                 </ScrollView>
             </RefreshView>
-            <RefreshView x:Name="noInternetRefreshView"
+        <RefreshView x:Name="noInternetRefreshView" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0,0,1,1"
                      IsVisible="False"
                      Margin="20,0"
                      IsRefreshing="False"

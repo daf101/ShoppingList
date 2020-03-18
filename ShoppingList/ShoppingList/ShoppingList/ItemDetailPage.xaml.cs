@@ -29,12 +29,6 @@ namespace ShoppingList
             itemNameEntry.Focus();
             int itemNameEntryLength = itemNameEntry.Text.Length;
             itemNameEntry.CursorPosition = itemNameEntryLength;
-
-            // Get Metrics
-            //var width = EditItemStackLayout.Width;
-            //var updateButtonWidth = updateButton.Width;
-            //EditItemStackLayout.WidthRequest = width;
-            //itemNameEntry.WidthRequest = width - updateButtonWidth;
         }
 
         protected override void OnDisappearing()

@@ -71,13 +71,14 @@
                     </StackLayout>
                 </ScrollView>
             </RefreshView>
-        <ImageButton x:Name="yourname"
+        <ImageButton x:Name="newItemFab"
                      BackgroundColor="Transparent"
                      Source="newitem2.png"
                      IsVisible="True"
                      AbsoluteLayout.LayoutFlags="PositionProportional"
                      AbsoluteLayout.LayoutBounds=".95,.95,80,80"
                      HeightRequest="50"
-                     WidthRequest="50"/>
+                     WidthRequest="50"
+                     Clicked="newItemFab_Clicked"/>
     </AbsoluteLayout>
 </ContentPage>

@@ -87,5 +87,10 @@ namespace ShoppingList
                 itemListView.SelectedItem = null; // de-select the row
             }
         }
+
+        private void newItemFab_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NewItemPage());
+        }
     }
 }

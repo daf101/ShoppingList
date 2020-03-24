@@ -10,7 +10,7 @@ namespace ShoppingList.Helpers
     {
         public async Task<bool> checkServerConnectivity ()
         {
-            List<Item> items = await Item.GetItems(false);
+            List<Item> items = await Item.GetItems("Default");
 
             return true;
         }

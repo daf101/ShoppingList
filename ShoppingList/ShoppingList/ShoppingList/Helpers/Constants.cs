@@ -15,5 +15,14 @@ namespace ShoppingList.Helpers
 
         // Authentication Required (Used for earlier dev while API security is being built):
         public const bool LOGON_REQUIRED = false;
+
+        // Preference Keys and values:
+        public const string SORT_BY = "SortBy";
+        public const string SORT_BY_DEFAULT = "Default";
+        public const string SORT_BY_NAME = "Name";
+
+
+
+        
     }
 }

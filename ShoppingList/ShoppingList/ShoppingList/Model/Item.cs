@@ -28,7 +28,7 @@ namespace ShoppingList.Model
             this.name = name;
         }
 
-        public async static Task<List<Item>> GetItems(bool sortByName) 
+        public async static Task<List<Item>> GetItems(string sortBy) 
         {
             List<Item> items = new List<Item>();
             try
@@ -42,9 +42,8 @@ namespace ShoppingList.Model
                     int itemSize = items.Count;
 
                     List<Item> filteredItems;
-                    if (sortByName)
+                    if (sortBy == "Name")
                     {
-                        //filteredItems = itemRoot.items.Where(item => item.active.Equals(1)).ToList();
                         filteredItems = itemRoot.items.Where(item => item.active.Equals(1)).OrderBy(item => item.name).ToList();
                     } 
                     else

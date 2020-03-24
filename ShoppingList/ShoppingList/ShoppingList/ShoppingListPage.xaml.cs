@@ -1,5 +1,6 @@
 ﻿using Plugin.Toast;
 using Rg.Plugins.Popup.Extensions;
+using ShoppingList.Helpers;
 using ShoppingList.Model;
 using ShoppingList.ViewModel;
 using System;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
@@ -24,20 +25,30 @@ namespace ShoppingList
             InitializeComponent();
             // Stops the ListView from going into the Status Bar:
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
-            
-            Command refreshCommand = new Command(() => {
-                refresh();
+
+            Command refreshCommand = new Command(() =>
+            {
+                refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
             });
 
             itemListView.RefreshCommand = refreshCommand;
             noInternetRefreshView.Command = refreshCommand;
             emptyViewRefreshView.Command = refreshCommand;
 
-            MessagingCenter.Subscribe<App>((App)Application.Current, "ItemDetailPageFinished", (sender) => {
-                refresh();
+            MessagingCenter.Subscribe<App>((App)Application.Current, "ItemDetailPageFinished", (sender) =>
+            {
+                
+                refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
             });
-            MessagingCenter.Subscribe<App>((App)Application.Current, "SortByNameSelected", (sender) => {
-                refresh();
+            MessagingCenter.Subscribe<App>((App)Application.Current, "SortByDefaultSelected", (sender) =>
+            {
+                Preferences.Set(Constants.SORT_BY, Constants.SORT_BY_DEFAULT);
+                refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+            });
+            MessagingCenter.Subscribe<App>((App)Application.Current, "SortByNameSelected", (sender) =>
+            {
+                Preferences.Set(Constants.SORT_BY, Constants.SORT_BY_NAME);
+                refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
             });
 
         }
@@ -45,13 +56,15 @@ namespace ShoppingList
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            refresh();
+            refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
         }
 
-        public async void refresh()
+        public async void refresh(string sortBy)
         {
+            var items = await Item.GetItems(sortBy);
+
             //itemListView.IsRefreshing = true;
-            var items = await Item.GetItems(true);
+
             if (items.Count == 0)
             {
                 emptyViewRefreshView.IsVisible = true;
@@ -77,10 +90,10 @@ namespace ShoppingList
                 emptyViewRefreshView.IsVisible = false;
                 itemListView.IsRefreshing = false;
                 itemListView.ItemsSource = items;
-                
+
             }
-            
-            
+
+
         }
 
         private void itemListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

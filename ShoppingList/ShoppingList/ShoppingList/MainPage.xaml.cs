@@ -1,4 +1,5 @@
-﻿using ShoppingList.ViewModel;
+﻿using ShoppingList.Helpers;
+using ShoppingList.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,8 +31,17 @@ namespace ShoppingList
 
         public async void ToolbarItem_Clicked_1(object sender, EventArgs e)
         {
-            string action = await DisplayActionSheet("Sort By", "Cancel", null, "Name");
-            MessagingCenter.Send<App>((App)Application.Current, "SortByNameSelected");
+            string action = await DisplayActionSheet("Sort By", "Cancel", null, Constants.SORT_BY_DEFAULT, Constants.SORT_BY_NAME);
+            
+            if (action == "Default")
+            {
+                MessagingCenter.Send<App>((App)Application.Current, "SortByDefaultSelected");
+            }
+            else if(action == "Name")
+            {
+                MessagingCenter.Send<App>((App)Application.Current, "SortByNameSelected");
+            }
+            
         }
     }
     

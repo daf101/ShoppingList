@@ -6,7 +6,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ShoppingList.ShoppingListPage">
+             x:Class="ShoppingList.ShoppingListPage"
+             xmlns:lv="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView" Padding="0,20,0,0"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls">
 
     <AbsoluteLayout>
 

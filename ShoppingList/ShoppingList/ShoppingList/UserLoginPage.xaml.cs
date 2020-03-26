@@ -48,7 +48,7 @@ namespace ShoppingList
                 await Navigation.PushAsync(new MainPage());
                 LoginButton.IsVisible = true;
                 loginLoading.IsVisible = false;
-                CrossToastPopUp.Current.ShowToastSuccess("Welcome back, " + currentUser.username.First().ToString().ToUpper() + currentUser.username.Substring(1));
+                CrossToastPopUp.Current.ShowToastSuccess(Strings.WELCOME_BACK + ", " + currentUser.username.First().ToString().ToUpper() + currentUser.username.Substring(1));
 
             }
                     

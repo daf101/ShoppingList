@@ -35,17 +35,17 @@ namespace ShoppingList
             noInternetRefreshView.Command = refreshCommand;
             emptyViewRefreshView.Command = refreshCommand;
 
-            MessagingCenter.Subscribe<App>((App)Application.Current, "ItemDetailPageFinished", (sender) =>
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.ITEM_DETAIL_PAGE_FINISHED, (sender) =>
             {
                 
                 refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
             });
-            MessagingCenter.Subscribe<App>((App)Application.Current, "SortByDefaultSelected", (sender) =>
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SORT_BY_DEFAULT_SELECTED, (sender) =>
             {
                 Preferences.Set(Constants.SORT_BY, Constants.SORT_BY_DEFAULT);
                 refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
             });
-            MessagingCenter.Subscribe<App>((App)Application.Current, "SortByNameSelected", (sender) =>
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SORT_BY_NAME_SELECTED, (sender) =>
             {
                 Preferences.Set(Constants.SORT_BY, Constants.SORT_BY_NAME);
                 refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
@@ -78,7 +78,7 @@ namespace ShoppingList
                 emptyViewRefreshView.IsVisible = false;
                 itemListView.IsVisible = false;
                 noInternetRefreshView.IsVisible = true;
-                CrossToastPopUp.Current.ShowToastError("Unable to connect to server");
+                CrossToastPopUp.Current.ShowToastError(Strings.UNABLE_TO_CONNECT);
                 noInternetRefreshView.IsRefreshing = false;
                 itemListView.IsRefreshing = false;
             }

@@ -1,5 +1,6 @@
 ﻿using Plugin.Toast;
 using Rg.Plugins.Popup.Extensions;
+using ShoppingList.Helpers;
 using ShoppingList.Model;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace ShoppingList
         {
             base.OnDisappearing();
 
-            MessagingCenter.Send<App>((App)Application.Current, "ItemDetailPageFinished");
+            MessagingCenter.Send<App>((App)Application.Current, Constants.ITEM_DETAIL_PAGE_FINISHED);
         }
 
         private async void deleteButton_Clicked(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace ShoppingList
             if (response.StatusCode.ToString() == "OK")
             {
                 await Navigation.PopPopupAsync();
-                CrossToastPopUp.Current.ShowToastSuccess("Item Removed Successfully");
+                CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_REMOVED_SUCCESSFULLY);
             }
         }
 

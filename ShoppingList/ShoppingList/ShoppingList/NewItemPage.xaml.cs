@@ -1,4 +1,5 @@
 ﻿using Plugin.Toast;
+using ShoppingList.Helpers;
 using ShoppingList.Model;
 using ShoppingList.ViewModel;
 using System;
@@ -37,12 +38,12 @@ namespace ShoppingList
                 {
                     // Great, the item was added. Letting the user know and going back to previous page:
                     await Navigation.PopAsync();
-                    CrossToastPopUp.Current.ShowToastSuccess("Item inserted successfully");
+                    CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_INSERTED_SUCCESSFULLY);
 
                 }
             } catch
             {
-                CrossToastPopUp.Current.ShowToastError("Can't connect. Check VPN/WiFi connectivity");
+                CrossToastPopUp.Current.ShowToastError(Strings.CANT_CONNECT);
             }
             
 

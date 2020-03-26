@@ -31,15 +31,15 @@ namespace ShoppingList
 
         public async void ToolbarItem_Clicked_1(object sender, EventArgs e)
         {
-            string action = await DisplayActionSheet("Sort By", "Cancel", null, Constants.SORT_BY_DEFAULT, Constants.SORT_BY_NAME);
+            string action = await DisplayActionSheet(Strings.SORT_BY, Strings.CANCEL, null, Constants.SORT_BY_DEFAULT, Constants.SORT_BY_NAME);
             
-            if (action == "Default")
+            if (action == Constants.SORT_BY_DEFAULT)
             {
-                MessagingCenter.Send<App>((App)Application.Current, "SortByDefaultSelected");
+                MessagingCenter.Send<App>((App)Application.Current, Constants.SORT_BY_DEFAULT_SELECTED);
             }
-            else if(action == "Name")
+            else if(action == Constants.SORT_BY_NAME)
             {
-                MessagingCenter.Send<App>((App)Application.Current, "SortByNameSelected");
+                MessagingCenter.Send<App>((App)Application.Current, Constants.SORT_BY_NAME_SELECTED);
             }
             
         }

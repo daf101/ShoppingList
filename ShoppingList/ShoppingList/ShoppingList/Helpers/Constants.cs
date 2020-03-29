@@ -22,7 +22,7 @@ namespace ShoppingList.Helpers
         public const string SORT_BY_NAME = "Name";
 
         // Messaging Centre values:
-        public const string ITEM_DETAIL_PAGE_FINISHED = "ItemDetailPageFinished";
+        public const string POPUP_PAGE_FINISHED = "PopUpPageFinished";
 
         public const string SORT_BY_DEFAULT_SELECTED = "SortByDefaultSelected";
         public const string SORT_BY_NAME_SELECTED = "SortByNameSelected";

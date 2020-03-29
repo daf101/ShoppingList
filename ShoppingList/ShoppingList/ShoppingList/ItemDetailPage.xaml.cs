@@ -36,7 +36,7 @@ namespace ShoppingList
         {
             base.OnDisappearing();
 
-            MessagingCenter.Send<App>((App)Application.Current, Constants.ITEM_DETAIL_PAGE_FINISHED);
+            MessagingCenter.Send<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED);
         }
 
         private async void deleteButton_Clicked(object sender, EventArgs e)

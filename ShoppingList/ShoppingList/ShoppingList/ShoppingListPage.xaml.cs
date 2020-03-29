@@ -35,7 +35,7 @@ namespace ShoppingList
             noInternetRefreshView.Command = refreshCommand;
             emptyViewRefreshView.Command = refreshCommand;
 
-            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.ITEM_DETAIL_PAGE_FINISHED, (sender) =>
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED, (sender) =>
             {
                 
                 refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
@@ -108,7 +108,7 @@ namespace ShoppingList
 
         private void newItemFab_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NewItemPage());
+            Navigation.PushPopupAsync(new NewItemPage());
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Plugin.Toast;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Pages;
 using ShoppingList.Helpers;
 using ShoppingList.Model;
 using ShoppingList.ViewModel;
@@ -15,7 +17,7 @@ using Xamarin.Forms.Xaml;
 namespace ShoppingList
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewItemPage : ContentPage
+    public partial class NewItemPage : PopupPage
     {
         NewItemVM viewModel;
         public NewItemPage()
@@ -23,6 +25,19 @@ namespace ShoppingList
             InitializeComponent();
             viewModel = new NewItemVM();
             BindingContext = viewModel;
+            
+        }
+
+        protected override void OnAppearing()
+        {
+            itemEntry.Focus();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Send<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED);
         }
 
         private async void AddButton_Clicked(object sender, EventArgs e)
@@ -37,7 +52,7 @@ namespace ShoppingList
                 if (response.StatusCode.ToString() == "OK")
                 {
                     // Great, the item was added. Letting the user know and going back to previous page:
-                    await Navigation.PopAsync();
+                    await Navigation.PopPopupAsync();
                     CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_INSERTED_SUCCESSFULLY);
 
                 }

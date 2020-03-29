@@ -12,7 +12,7 @@
         <ToolbarItem Text="Sort buy"                    
                      IconImageSource="menu.png"
                      Order="Primary"
-                     Clicked="ToolbarItem_Clicked_1"/>
+                     Command="{Binding SortByCmd}"/>
     </TabbedPage.ToolbarItems>
 
     <local:ShoppingListPage x:Name="ShoppingListTab"

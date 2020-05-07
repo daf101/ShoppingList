@@ -13,20 +13,7 @@ namespace ShoppingList.Model
 {
     public class Item : INotifyPropertyChanged
     {
-        public Item() { }
-        public Item(int id, string name, int active)
-        {
-            this.id = id;
-            this.name = name;
-            this.active = active;
-        }
-        public Item(string name)
-        {
-            this.name = name;
-        }
-
         private int id;
-
         public int Id
         {
             get { return id; }
@@ -38,7 +25,6 @@ namespace ShoppingList.Model
         }
 
         private string name;
-
         public string Name
         {
             get { return name; }
@@ -50,15 +36,27 @@ namespace ShoppingList.Model
         }
 
         private int active;
-
         public int Active
         {
             get { return active; }
             set 
             { 
-                Active = value;
+                active = value;
                 OnPropertyChanged("Active");
             }
+        }
+
+
+        public Item() {}
+        public Item(int id, string name, int active) 
+        {
+            this.id = id;
+            this.name = name;
+            this.active = active;
+        }
+        public Item(string name)
+        {
+            this.name = name;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -97,9 +95,7 @@ namespace ShoppingList.Model
             } 
             catch(Exception e)
             {
-                Item errorItem = new Item();
-                errorItem.Name = e.Message;
-                items.Add(errorItem);
+                items.Add(new Item(e.Message));
             }
             return items;
         }

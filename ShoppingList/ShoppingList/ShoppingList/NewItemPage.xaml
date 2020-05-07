@@ -44,8 +44,7 @@
                    Placeholder="Milk etc"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="FillAndExpand"
-                   FontSize="20"
-                   Completed="AddButton_Clicked"/>
+                   FontSize="20"/>
 
             <Button x:Name="AddButton" 
                     HorizontalOptions="End"
@@ -55,7 +54,8 @@
                     BackgroundColor="Transparent"
                     Margin="0,0,0,0"              
                     Text="Add To Shopping List"
-                    Clicked="AddButton_Clicked"/>
+                    Command="{Binding NewItemCmd}"
+                    CommandParameter="{Binding Item}"/>
 
         </StackLayout>
 

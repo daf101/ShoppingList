@@ -23,7 +23,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid>
-                            <Label Text="{Binding name}"
+                            <Label Text="{Binding Name}"
                                    FontAttributes="Bold"
                                    VerticalOptions="Center"/>
                         </Grid>

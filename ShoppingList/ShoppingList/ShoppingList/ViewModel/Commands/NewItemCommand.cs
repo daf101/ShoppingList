@@ -20,12 +20,12 @@ namespace ShoppingList.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            var item = (Item)parameter;
-            if (item.name != null)
-            {
-                return true;
-            }
-            return false;
+            //var item = (Item)parameter;
+            //if (item.name != null)
+            //{
+            //    return true;
+            //}
+            return true;
         }
 
         public void Execute(object parameter)

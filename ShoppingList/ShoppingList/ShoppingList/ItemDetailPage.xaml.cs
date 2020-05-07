@@ -26,7 +26,7 @@ namespace ShoppingList
 
         protected override void OnAppearing()
         {
-            itemNameEntry.Text = SelectedItem.name;
+            itemNameEntry.Text = SelectedItem.Name;
             itemNameEntry.Focus();
             int itemNameEntryLength = itemNameEntry.Text.Length;
             itemNameEntry.CursorPosition = itemNameEntryLength;
@@ -42,8 +42,8 @@ namespace ShoppingList
         private async void deleteButton_Clicked(object sender, EventArgs e)
         {
             Item item = new Item();
-            item.active = 0;
-            item.name = SelectedItem.name;
+            item.Active = 0;
+            item.Name = SelectedItem.Name;
             HttpResponseMessage response = await Item.Put(item);
 
             if (response.StatusCode.ToString() == "OK")
@@ -73,7 +73,7 @@ namespace ShoppingList
 
         private async void updateItem()
         {
-            SelectedItem.name = itemNameEntry.Text;
+            SelectedItem.Name = itemNameEntry.Text;
             Item test = SelectedItem;
             await Item.Put(SelectedItem);
         }

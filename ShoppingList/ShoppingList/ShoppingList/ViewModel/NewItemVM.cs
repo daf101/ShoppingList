@@ -3,6 +3,7 @@ using ShoppingList.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net.Http;
 using System.Text;
 
 namespace ShoppingList.ViewModel
@@ -10,8 +11,10 @@ namespace ShoppingList.ViewModel
     public class NewItemVM : INotifyPropertyChanged
     {
         public NewItemCommand NewItemCmd { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
         private Item Item;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        
 
         public NewItemVM()
         {
@@ -29,8 +32,10 @@ namespace ShoppingList.ViewModel
             {
                 await App.Current.MainPage.DisplayAlert("Failure", "Item failed to be insert", "Ok");
             }
-           
+
         }
+
+       
     }
 
 

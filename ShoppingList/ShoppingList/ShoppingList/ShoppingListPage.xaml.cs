@@ -73,7 +73,7 @@ namespace ShoppingList
                 emptyViewRefreshView.IsRefreshing = false;
                 itemListView.IsRefreshing = false;
             }
-            else if (items[0].name.Contains("Unable to resolve host"))
+            else if (items[0].Name.Contains("Unable to resolve host"))
             {
                 emptyViewRefreshView.IsVisible = false;
                 itemListView.IsVisible = false;

@@ -2,6 +2,7 @@
 using ShoppingList.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -10,11 +11,41 @@ using Xamarin.Forms.Internals;
 
 namespace ShoppingList.Model
 {
-    public class Item
+    public class Item : INotifyPropertyChanged
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public int active { get; set; }
+        private int id;
+        public int Id
+        {
+            get { return id; }
+            set 
+            { 
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set 
+            { 
+                name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        private int active;
+        public int Active
+        {
+            get { return active; }
+            set 
+            { 
+                active = value;
+                OnPropertyChanged("Active");
+            }
+        }
+
 
         public Item() {}
         public Item(int id, string name, int active) 
@@ -26,6 +57,14 @@ namespace ShoppingList.Model
         public Item(string name)
         {
             this.name = name;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public async static Task<List<Item>> GetItems(string sortBy) 

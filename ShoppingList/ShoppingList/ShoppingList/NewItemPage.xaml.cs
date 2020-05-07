@@ -46,8 +46,8 @@ namespace ShoppingList
             try
             {
                 Item item = new Item();
-                item.active = 1;
-                item.name = itemEntry.Text;
+                item.Active = 1;
+                item.Name = itemEntry.Text;
                 response = await Item.Put(item);
                 if (response.StatusCode.ToString() == "OK")
                 {

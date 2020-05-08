@@ -46,7 +46,8 @@
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="FillAndExpand"
                    FontSize="20"
-                   Completed="AddButton_Clicked"/>
+                   ReturnCommand="{Binding NewItemCommand}"
+                   ReturnCommandParameter="{Binding Item}"/>
 
             <Button x:Name="AddButton" 
                     HorizontalOptions="End"

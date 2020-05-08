@@ -9,6 +9,7 @@ namespace ShoppingList.Helpers
         // Toast Messages:
         public const string ITEM_REMOVED_SUCCESSFULLY = "Item Removed Successfully";
         public const string ITEM_INSERTED_SUCCESSFULLY = "Item Inserted Successfully";
+        public const string ITEM_FAILED_TO_BE_INSERTED = "Item failed to be inserted";
         public const string CANT_CONNECT = "Can't connect. Check VPN/WiFi connectivity";
         public const string UNABLE_TO_CONNECT = "Unable to connect to server";
         public const string WELCOME_BACK = "Welcome back";

@@ -25,7 +25,14 @@ namespace ShoppingList
             InitializeComponent();
             viewModel = new NewItemVM();
             BindingContext = viewModel;
-            
+
+            // When Below Message Recieved, close page.
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.CLOSE_POPUP_PAGE, (sender) =>
+            {
+                // Do Stuff
+                Navigation.PopPopupAsync();
+            });
+
         }
 
         protected override void OnAppearing()
@@ -38,32 +45,6 @@ namespace ShoppingList
             base.OnDisappearing();
 
             MessagingCenter.Send<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED);
-        }
-
-        private async void AddButton_Clicked(object sender, EventArgs e)
-        {
-            HttpResponseMessage response;
-            try
-            {
-                Item item = new Item();
-                item.Active = 1;
-                item.Name = itemEntry.Text;
-                response = await Item.Put(item);
-                if (response.StatusCode.ToString() == "OK")
-                {
-                    // Great, the item was added. Letting the user know and going back to previous page:
-                    await Navigation.PopPopupAsync();
-                    CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_INSERTED_SUCCESSFULLY);
-
-                }
-            }
-            catch
-            {
-                CrossToastPopUp.Current.ShowToastError(Strings.CANT_CONNECT);
-            }
-
-
-
         }
     }
 }

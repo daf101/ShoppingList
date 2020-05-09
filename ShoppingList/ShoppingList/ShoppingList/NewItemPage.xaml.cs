@@ -27,7 +27,7 @@ namespace ShoppingList
             BindingContext = viewModel;
 
             // When Below Message Recieved, close page.
-            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.CLOSE_POPUP_PAGE, (sender) =>
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.CLOSE_NEW_ITEM_PAGE, (sender) =>
             {
                 // Do Stuff
                 Navigation.PopPopupAsync();
@@ -37,6 +37,7 @@ namespace ShoppingList
 
         protected override void OnAppearing()
         {
+            // Setting focus on item entry:
             itemEntry.Focus();
         }
 
@@ -44,7 +45,9 @@ namespace ShoppingList
         {
             base.OnDisappearing();
 
+            // Telling app the Popup page has finished, so the ShoppingListPage refreshes:
             MessagingCenter.Send<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED);
+
         }
     }
 }

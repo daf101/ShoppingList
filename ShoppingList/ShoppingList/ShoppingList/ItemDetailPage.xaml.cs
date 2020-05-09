@@ -1,7 +1,9 @@
 ﻿using Plugin.Toast;
 using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Pages;
 using ShoppingList.Helpers;
 using ShoppingList.Model;
+using ShoppingList.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +17,28 @@ using Xamarin.Forms.Xaml;
 namespace ShoppingList
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ItemDetailPage : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class ItemDetailPage : PopupPage
     {
         Item SelectedItem;
+        ItemDetailVM viewModel;
         public ItemDetailPage(Item selectedItem)
         {
             InitializeComponent();
             SelectedItem = selectedItem;
+            viewModel = new ItemDetailVM();
+            BindingContext = viewModel;
+
+            // When below message is recieved, close page:
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE, (sender) =>
+            {
+                Navigation.PopPopupAsync();
+            });
         }
 
         protected override void OnAppearing()
         {
             itemNameEntry.Text = SelectedItem.Name;
+            itemIdLabel.Text = SelectedItem.Id.ToString();
             itemNameEntry.Focus();
             int itemNameEntryLength = itemNameEntry.Text.Length;
             itemNameEntry.CursorPosition = itemNameEntryLength;
@@ -39,43 +51,5 @@ namespace ShoppingList
             MessagingCenter.Send<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED);
         }
 
-        private async void deleteButton_Clicked(object sender, EventArgs e)
-        {
-            Item item = new Item();
-            item.Active = 0;
-            item.Name = SelectedItem.Name;
-            HttpResponseMessage response = await Item.Put(item);
-
-            if (response.StatusCode.ToString() == "OK")
-            {
-                await Navigation.PopPopupAsync();
-                CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_REMOVED_SUCCESSFULLY);
-            }
-        }
-
-        private void cancelButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PopPopupAsync();
-        }
-
-        private void itemNameEntry_Completed(object sender, EventArgs e)
-        {
-            // Update item
-            updateItem();
-            Navigation.PopPopupAsync();
-        }
-
-        private void updateButton_Clicked(object sender, EventArgs e)
-        {
-            updateItem();
-            Navigation.PopPopupAsync();
-        }
-
-        private async void updateItem()
-        {
-            SelectedItem.Name = itemNameEntry.Text;
-            Item test = SelectedItem;
-            await Item.Put(SelectedItem);
-        }
     }
 }

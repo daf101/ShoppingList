@@ -11,16 +11,18 @@ using Xamarin.Forms;
 
 namespace ShoppingList.ViewModel
 {
-    public class NewItemVM : INotifyPropertyChanged
+    public class ItemDetailVM : INotifyPropertyChanged
     {
-        public NewItemCommand NewItemCommand { get; set; }
-        
+
+        public DeleteItemCommand DeleteItemCommand { get; set; }
+        public ClosePopUpCommand ClosePopUpCommand { get; set; }
+        public UpdateItemCommand UpdateItemCommand { get; set; }
         private Item item;
         public Item Item
         {
             get { return item; }
-            set 
-            { 
+            set
+            {
                 item = value;
                 OnPropertyChanged("Item");
             }
@@ -47,7 +49,7 @@ namespace ShoppingList.ViewModel
         public string Name
         {
             get { return name; }
-            set 
+            set
             {
                 name = value;
                 Item = new Item()
@@ -55,7 +57,7 @@ namespace ShoppingList.ViewModel
                     Id = this.Id,
                     Name = this.Name,
                     Active = this.Active
-                };                 
+                };
                 OnPropertyChanged("Name");
             }
         }
@@ -77,14 +79,13 @@ namespace ShoppingList.ViewModel
             }
         }
 
-
-
-        public NewItemVM()
+        public ItemDetailVM()
         {
-            NewItemCommand = new NewItemCommand(this);
+            DeleteItemCommand = new DeleteItemCommand(this);
+            UpdateItemCommand = new UpdateItemCommand(this);
+            ClosePopUpCommand = new ClosePopUpCommand(this);
             Item = new Item();
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -96,27 +97,48 @@ namespace ShoppingList.ViewModel
             }
         }
 
-        public async void PutNewItem(Item item)
+        // Methods go here:
+        public async void updateItem(Item updatedItem)
         {
-            try
-            {
-                HttpResponseMessage response = await Item.Put(item);
-                //TODO: Send Message to close popup page:
-                if (response.StatusCode.ToString() == "OK")
-                {
-                    // Great, the item was added. Letting the user know and going back to previous page:
-                    CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_INSERTED_SUCCESSFULLY);
+            updatedItem.Active = 1;
+            HttpResponseMessage response = await Item.Put(updatedItem);
 
-                }
-                MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_NEW_ITEM_PAGE);
-            }
-            catch (Exception ex)
+            if (response.StatusCode.ToString() == "OK")
             {
-                await App.Current.MainPage.DisplayAlert("Failure", "Item failed to be insert", "Ok");
+                CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_UPDATED_SUCCESSFULLY);
+                //Close popup page:
+                MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE);
+            } else
+            {
+                // Error occured updating item:
+
             }
-           
         }
+
+        public async void deleteItem(Item itemToDelete)
+        {
+            itemToDelete.Active = 0;
+            HttpResponseMessage response = await Item.Put(itemToDelete);
+
+            if (response.StatusCode.ToString() == "OK")
+            {
+                
+                CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_REMOVED_SUCCESSFULLY);
+                //Close popup page:
+                MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE);
+            }
+            else
+            {
+                // Error occured deleting item:
+
+            }
+        }
+
+        public void closePopup()
+        {
+            MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE);
+        }
+
+
     }
-
-
 }

@@ -24,7 +24,6 @@
             HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
 
-
     <StackLayout
         VerticalOptions="End"
         Padding="5,5,5,5"
@@ -41,11 +40,21 @@
             Padding="5,0,5,0">
 
             <Entry 
+               Text="{Binding Name, Mode=TwoWay}"
                x:Name="itemNameEntry"
                VerticalOptions="CenterAndExpand"
                HorizontalOptions="FillAndExpand"
                FontSize="20"
-               Completed="itemNameEntry_Completed"/>
+               ReturnCommand="{Binding UpdateItemCommand}"
+               ReturnCommandParameter="{Binding Item}"/>
+
+            <Label 
+               Text="{Binding Id, Mode=TwoWay}"
+               x:Name="itemIdLabel"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="FillAndExpand"
+               FontSize="20"
+               IsVisible="False"/>
 
             <Button 
                 x:Name="updateButton"
@@ -54,7 +63,8 @@
                 WidthRequest="50"
                 HeightRequest="50"
                 BackgroundColor="Transparent"
-                Clicked="updateButton_Clicked"/>
+                Command="{Binding UpdateItemCommand}"
+                CommandParameter="{Binding Item}"/>
 
         </StackLayout>
 
@@ -62,18 +72,17 @@
             Orientation="Horizontal"
             HorizontalOptions="Center">
             
-
             <Button Text="Delete"
                 x:Name="deleteButton"
-                Clicked="deleteButton_Clicked"/>
+                Command="{Binding DeleteItemCommand}"
+                CommandParameter="{Binding Item}"/>
 
             <Button Text="Cancel"
                 x:Name="cancelButton"
-                Clicked="cancelButton_Clicked"/>
+                Command="{Binding ClosePopUpCommand}"/>
             
         </StackLayout>
         
     </StackLayout>
         
-    
 </pages:PopupPage>

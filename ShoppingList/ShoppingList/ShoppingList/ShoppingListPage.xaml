@@ -13,11 +13,13 @@
     <AbsoluteLayout>
 
         <ListView x:Name="itemListView" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  ItemSelected="itemListView_ItemSelected"
+                  
+                  SelectedItem="{Binding SelectedItem}"
                   Margin="20,0"
                   HorizontalOptions="FillAndExpand"
                   IsPullToRefreshEnabled="True"
-                  IsRefreshing="False">
+                  IsRefreshing="False"
+                  RefreshCommand="{Binding RefreshCommand}">
                   
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -34,7 +36,8 @@
         <RefreshView x:Name="emptyViewRefreshView" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0,0,1,1"
                      IsVisible="False"
                      IsRefreshing="False"
-                     IsEnabled="True">
+                     IsEnabled="True"
+                     Command="{Binding RefreshCommand}">
                 <ScrollView>
                     <StackLayout VerticalOptions="CenterAndExpand">
                         <Label Text="Hmmm..."
@@ -52,7 +55,8 @@
                      IsVisible="False"
                      Margin="20,0"
                      IsRefreshing="False"
-                     IsEnabled="True">
+                     IsEnabled="True"
+                     Command="{Binding RefreshCommand}">
                 <ScrollView>
                     <StackLayout x:Name="noInternetView"
                              VerticalOptions="CenterAndExpand">
@@ -81,6 +85,6 @@
                      AbsoluteLayout.LayoutBounds=".95,.95,80,80"
                      HeightRequest="50"
                      WidthRequest="50"
-                     Clicked="newItemFab_Clicked"/>
+                     Command="{Binding NewItemNavCommand}"/>
     </AbsoluteLayout>
 </ContentPage>

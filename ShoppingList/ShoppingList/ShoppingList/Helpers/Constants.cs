@@ -22,11 +22,17 @@ namespace ShoppingList.Helpers
         public const string SORT_BY_NAME = "Name";
 
         // Messaging Centre values:
+        public const string SORT_BY_DEFAULT_SELECTED = "SortByDefaultSelected";
+        public const string SORT_BY_NAME_SELECTED = "SortByNameSelected";
+
+        public const string DISPLAY_EMPTY_VIEW = "DisplayEmptyView";
+        public const string DISPLAY_NETWORK_ERROR = "DisplayNetworkError";
+        public const string LISTVIEW_REFRESH_COMPLETE = "ListViewRefreshComplete";
+
         public const string CLOSE_NEW_ITEM_PAGE = "CloseNewItemPage";
         public const string CLOSE_ITEM_DETAIL_PAGE = "CloseItemDetailPage";
         public const string POPUP_PAGE_FINISHED = "PopUpPageFinished";
 
-        public const string SORT_BY_DEFAULT_SELECTED = "SortByDefaultSelected";
-        public const string SORT_BY_NAME_SELECTED = "SortByNameSelected";
+        
     }
 }

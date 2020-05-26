@@ -19,61 +19,48 @@ namespace ShoppingList
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShoppingListPage : ContentPage
     {
+        ShoppingListVM viewModel;
 
         public ShoppingListPage()
         {
             InitializeComponent();
             // Stops the ListView from going into the Status Bar:
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
+            var assembly = typeof(ShoppingListPage);
+            viewModel = new ShoppingListVM();
+            BindingContext = viewModel;
 
-            Command refreshCommand = new Command(() =>
+            // Messaging Centre Subscriptions:
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED, async (sender) =>
             {
-                refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+                var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+                itemListView.ItemsSource = items;
             });
-
-            itemListView.RefreshCommand = refreshCommand;
-            noInternetRefreshView.Command = refreshCommand;
-            emptyViewRefreshView.Command = refreshCommand;
-
-            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED, (sender) =>
-            {
-                
-                refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
-            });
-            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SORT_BY_DEFAULT_SELECTED, (sender) =>
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SORT_BY_DEFAULT_SELECTED, async (sender) =>
             {
                 Preferences.Set(Constants.SORT_BY, Constants.SORT_BY_DEFAULT);
-                refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+                var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+                itemListView.ItemsSource = items;
             });
-            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SORT_BY_NAME_SELECTED, (sender) =>
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SORT_BY_NAME_SELECTED, async (sender) =>
             {
                 Preferences.Set(Constants.SORT_BY, Constants.SORT_BY_NAME);
-                refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+                var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+                itemListView.ItemsSource = items;
             });
 
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
-        }
-
-        public async void refresh(string sortBy)
-        {
-            var items = await Item.GetItems(sortBy);
-
-            //itemListView.IsRefreshing = true;
-
-            if (items.Count == 0)
+            // No items in cart, displaying empty view:
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.DISPLAY_EMPTY_VIEW, (sender) =>
             {
                 emptyViewRefreshView.IsVisible = true;
                 itemListView.IsVisible = false;
                 noInternetRefreshView.IsVisible = false;
                 emptyViewRefreshView.IsRefreshing = false;
                 itemListView.IsRefreshing = false;
-            }
-            else if (items[0].Name.Contains("Unable to resolve host"))
+            });
+
+            // Display Network Error:
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.DISPLAY_NETWORK_ERROR, (sender) =>
             {
                 emptyViewRefreshView.IsVisible = false;
                 itemListView.IsVisible = false;
@@ -81,34 +68,23 @@ namespace ShoppingList
                 CrossToastPopUp.Current.ShowToastError(Strings.UNABLE_TO_CONNECT);
                 noInternetRefreshView.IsRefreshing = false;
                 itemListView.IsRefreshing = false;
-            }
-            else
+            });
+
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE, (sender) =>
             {
                 itemListView.IsVisible = true;
                 noInternetRefreshView.IsVisible = false;
                 noInternetRefreshView.IsRefreshing = false;
                 emptyViewRefreshView.IsVisible = false;
                 itemListView.IsRefreshing = false;
-                itemListView.ItemsSource = items;
-
-            }
-
-
+            });
         }
 
-        private void itemListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        protected override async void OnAppearing()
         {
-            var selectedItem = itemListView.SelectedItem as Item;
-            if (selectedItem != null)
-            {
-                Navigation.PushPopupAsync(new ItemDetailPage(selectedItem));
-                itemListView.SelectedItem = null; // de-select the row
-            }
-        }
-
-        private void newItemFab_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushPopupAsync(new NewItemPage());
+            base.OnAppearing();
+            var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+            itemListView.ItemsSource = items;
         }
     }
 }

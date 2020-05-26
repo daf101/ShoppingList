@@ -38,7 +38,7 @@
         <StackLayout x:Name="EditItemStackLayout"
             Orientation="Horizontal"
             HorizontalOptions="FillAndExpand"
-            Padding="5,0,5,0">
+            Padding="5,0,5,20">
 
             <Entry x:Name="itemEntry"
                    Text="{Binding Name, Mode=TwoWay}"

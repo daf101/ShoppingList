@@ -70,7 +70,8 @@
 
         <StackLayout
             Orientation="Horizontal"
-            HorizontalOptions="Center">
+            HorizontalOptions="Center"
+            Padding="0,0,0,20">
             
             <Button Text="Delete"
                 x:Name="deleteButton"

@@ -28,12 +28,12 @@
 
     <StackLayout  VerticalOptions="End"
         Padding="5,5,5,5"
-        BackgroundColor="SteelBlue"
+        BackgroundColor="#2196F3"
         Orientation="Vertical">
 
         <Label Text="New Item:"
                FontSize="30"
-               TextColor="Black"/>
+               TextColor="White"/>
 
         <StackLayout x:Name="EditItemStackLayout"
             Orientation="Horizontal"
@@ -43,6 +43,8 @@
             <Entry x:Name="itemEntry"
                    Text="{Binding Name, Mode=TwoWay}"
                    Placeholder="Milk etc"
+                   PlaceholderColor="#cfcfcf"
+                   TextColor="Black"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="FillAndExpand"
                    FontSize="20"

@@ -27,12 +27,12 @@
     <StackLayout
         VerticalOptions="End"
         Padding="5,5,5,5"
-        BackgroundColor="SteelBlue"
+        BackgroundColor="#2196F3"
         Orientation="Vertical">
 
         <Label Text="Edit Item:"
                FontSize="30"
-               TextColor="Black"/>
+               TextColor="White"/>
 
         <StackLayout x:Name="EditItemStackLayout"
             Orientation="Horizontal"
@@ -45,6 +45,7 @@
                VerticalOptions="CenterAndExpand"
                HorizontalOptions="FillAndExpand"
                FontSize="20"
+               TextColor="Black"
                ReturnCommand="{Binding UpdateItemCommand}"
                ReturnCommandParameter="{Binding Item}"/>
 
@@ -75,11 +76,13 @@
             
             <Button Text="Delete"
                 x:Name="deleteButton"
+                TextColor="Black"
                 Command="{Binding DeleteItemCommand}"
                 CommandParameter="{Binding Item}"/>
 
             <Button Text="Cancel"
                 x:Name="cancelButton"
+                TextColor="Black"
                 Command="{Binding ClosePopUpCommand}"/>
             
         </StackLayout>

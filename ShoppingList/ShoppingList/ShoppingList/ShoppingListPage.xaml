@@ -86,5 +86,7 @@
                      HeightRequest="50"
                      WidthRequest="50"
                      Command="{Binding NewItemNavCommand}"/>
+        
+        
     </AbsoluteLayout>
 </ContentPage>

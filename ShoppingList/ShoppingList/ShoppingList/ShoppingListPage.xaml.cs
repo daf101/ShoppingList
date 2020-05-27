@@ -85,6 +85,14 @@ namespace ShoppingList
             base.OnAppearing();
             var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
             itemListView.ItemsSource = items;
+
+            // Sample Popup show here:
+            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
+            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
+            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
+            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
+            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
+            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
         }
     }
 }

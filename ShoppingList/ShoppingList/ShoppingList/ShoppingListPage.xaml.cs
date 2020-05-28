@@ -49,6 +49,10 @@ namespace ShoppingList
                 itemListView.ItemsSource = items;
             });
 
+            MessagingCenter.Subscribe<App>((App)Application.Current,Constants.ITEM_DELETED, async (sender) => {
+                await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
+            });
+
             // No items in cart, displaying empty view:
             MessagingCenter.Subscribe<App>((App)Application.Current, Constants.DISPLAY_EMPTY_VIEW, (sender) =>
             {
@@ -85,14 +89,7 @@ namespace ShoppingList
             base.OnAppearing();
             var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
             itemListView.ItemsSource = items;
-
-            // Sample Popup show here:
-            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
-            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
-            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
-            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
-            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
-            await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
+            
         }
     }
 }

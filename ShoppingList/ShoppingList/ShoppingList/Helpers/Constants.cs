@@ -33,6 +33,10 @@ namespace ShoppingList.Helpers
         public const string CLOSE_ITEM_DETAIL_PAGE = "CloseItemDetailPage";
         public const string POPUP_PAGE_FINISHED = "PopUpPageFinished";
 
+        public const string UNDO_POPUP_CLOSED = "UndoPopupClosed";
+
+        public const string ITEM_DELETED = "ItemDeleted";
+
         
     }
 }

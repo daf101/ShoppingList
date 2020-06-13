@@ -17,6 +17,7 @@ namespace ShoppingList.ViewModel
         public DeleteItemCommand DeleteItemCommand { get; set; }
         public ClosePopUpCommand ClosePopUpCommand { get; set; }
         public UpdateItemCommand UpdateItemCommand { get; set; }
+
         private Item item;
         public Item Item
         {
@@ -41,7 +42,7 @@ namespace ShoppingList.ViewModel
                     Name = this.Name,
                     Active = this.Active
                 };
-                OnPropertyChanged("Id");
+                    OnPropertyChanged("Id");
             }
         }
 
@@ -127,7 +128,8 @@ namespace ShoppingList.ViewModel
                 //Close popup page:
                 MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE);
                 // Letting previous page know item was deleted so user can undo if needed.
-                MessagingCenter.Send<App>((App)Application.Current, Constants.ITEM_DELETED);
+                //MessagingCenter.Send<App>((App)Application.Current, Constants.ITEM_DELETED);
+                MessagingCenter.Send<ItemDetailVM,Item>(this,Constants.ITEM_DELETED, itemToDelete);
             }
             else
             {

@@ -133,7 +133,8 @@ namespace ShoppingList.ViewModel
             else
             {
                 // refresh Completed:
-                MessagingCenter.Send<App>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE);
+                //MessagingCenter.Send<App>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE);
+                MessagingCenter.Send<App,List<Item>>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE, items);
             }
 
             return items;

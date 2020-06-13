@@ -49,8 +49,8 @@ namespace ShoppingList
                 itemListView.ItemsSource = items;
             });
 
-            MessagingCenter.Subscribe<App>((App)Application.Current,Constants.ITEM_DELETED, async (sender) => {
-                await Navigation.PushPopupAsync(new ShoppingListPageUndoPopup());
+            MessagingCenter.Subscribe<ItemDetailVM,Item>(this,Constants.ITEM_DELETED, (sender, deletedItem) => {
+                Navigation.PushPopupAsync(new ShoppingListPageUndoPopup(deletedItem));
             });
 
             // No items in cart, displaying empty view:
@@ -74,13 +74,14 @@ namespace ShoppingList
                 itemListView.IsRefreshing = false;
             });
 
-            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE, (sender) =>
+            MessagingCenter.Subscribe<App, List<Item>>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE, (sender, items) =>
             {
                 itemListView.IsVisible = true;
                 noInternetRefreshView.IsVisible = false;
                 noInternetRefreshView.IsRefreshing = false;
                 emptyViewRefreshView.IsVisible = false;
                 itemListView.IsRefreshing = false;
+                itemListView.ItemsSource = items;
             });
         }
 

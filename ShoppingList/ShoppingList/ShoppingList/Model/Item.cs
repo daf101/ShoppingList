@@ -54,6 +54,7 @@ namespace ShoppingList.Model
             this.name = name;
             this.active = active;
         }
+
         public Item(string name)
         {
             this.name = name;

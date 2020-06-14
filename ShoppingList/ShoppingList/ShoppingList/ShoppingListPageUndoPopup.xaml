@@ -33,17 +33,19 @@
         x:Name="PopupPageStackLayout"
         VerticalOptions="End"
         Padding="5,5,5,5"
-        BackgroundColor="#2196F3"
+        BackgroundColor="#17c200"
         Orientation="Horizontal"
         HeightRequest="45">
 
         <Label
             x:Name="InformationLabel"
             Text="#1"
-            HorizontalOptions="StartAndExpand"/>
+            HorizontalOptions="StartAndExpand"
+            FontSize="15"/>
 
         <Button 
-               Text="Undo..."
+               x:Name="undoButton"
+               Text="(5) Undo"
                TextColor="Black"
                HorizontalOptions="EndAndExpand"
                Clicked="UndoButton_Clicked"/>

@@ -33,15 +33,23 @@ namespace ShoppingList
             {
                 Navigation.PopPopupAsync();
             });
+            //MessagingCenter.Subscribe<App>((App))
+
+            
         }
 
         protected override void OnAppearing()
         {
-            itemNameEntry.Text = SelectedItem.Name;
-            itemIdLabel.Text = SelectedItem.Id.ToString();
-            itemNameEntry.Focus();
-            int itemNameEntryLength = itemNameEntry.Text.Length;
-            itemNameEntry.CursorPosition = itemNameEntryLength;
+            // Requesting all open undo pops to close:
+            try
+            {
+                MessagingCenter.Send<App>((App)Application.Current, Constants.REQUEST_UNDO_POPUP_CLOSE);
+            }
+            catch
+            {
+                // If there's an issue, not to worry.
+            }
+            refocus();
         }
 
         protected override void OnDisappearing()
@@ -49,6 +57,15 @@ namespace ShoppingList
             base.OnDisappearing();
 
             MessagingCenter.Send<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED);
+        }
+
+        private void refocus()
+        {
+            itemNameEntry.Text = SelectedItem.Name;
+            itemIdLabel.Text = SelectedItem.Id.ToString();
+            itemNameEntry.Focus();
+            int itemNameEntryLength = itemNameEntry.Text.Length;
+            itemNameEntry.CursorPosition = itemNameEntryLength;
         }
 
     }

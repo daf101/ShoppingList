@@ -37,6 +37,10 @@ namespace ShoppingList.Helpers
 
         public const string ITEM_DELETED = "ItemDeleted";
 
-        
+        public const string REQUEST_UNDO_POPUP_CLOSE = "RequestUndoPopupClose";
+
+        public const string REFOCUS = "Refocus";
+
+
     }
 }

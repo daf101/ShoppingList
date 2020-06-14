@@ -124,7 +124,6 @@ namespace ShoppingList.ViewModel
             if (response.StatusCode.ToString() == "OK")
             {
                 
-                CrossToastPopUp.Current.ShowToastSuccess(Strings.ITEM_REMOVED_SUCCESSFULLY);
                 //Close popup page:
                 MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE);
                 // Letting previous page know item was deleted so user can undo if needed.

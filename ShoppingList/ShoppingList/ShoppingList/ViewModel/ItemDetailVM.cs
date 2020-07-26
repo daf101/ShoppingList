@@ -1,4 +1,5 @@
 ﻿using Plugin.Toast;
+using Rg.Plugins.Popup.Services;
 using ShoppingList.Helpers;
 using ShoppingList.Model;
 using ShoppingList.ViewModel.Commands;
@@ -126,9 +127,10 @@ namespace ShoppingList.ViewModel
                 
                 //Close popup page:
                 MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE);
+
                 // Letting previous page know item was deleted so user can undo if needed.
-                //MessagingCenter.Send<App>((App)Application.Current, Constants.ITEM_DELETED);
-                MessagingCenter.Send<ItemDetailVM,Item>(this,Constants.ITEM_DELETED, itemToDelete);
+                await PopupNavigation.Instance.PushAsync(new ShoppingListPageUndoPopup(itemToDelete));
+                //MessagingCenter.Send<ItemDetailVM,Item>(this,Constants.ITEM_DELETED, itemToDelete);
             }
             else
             {

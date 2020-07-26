@@ -41,6 +41,8 @@ namespace ShoppingList.Helpers
 
         public const string REFOCUS = "Refocus";
 
+        public const string REFOCUS_KEYBOARD = "RefocusKeyboard";
+
 
     }
 }

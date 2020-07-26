@@ -6,6 +6,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Views.InputMethods;
+using Android.Content;
+using ShoppingList.Interfaces;
+using Xamarin.Forms;
+using ShoppingList.Droid.Renderers;
 
 namespace ShoppingList.Droid
 {
@@ -41,6 +46,34 @@ namespace ShoppingList.Droid
             else
             {
                 // Do something if there are not any pages in the `PopupStack`
+            }
+        }
+
+
+
+        private bool _lieAboutCurrentFocus;
+        public override bool DispatchTouchEvent(MotionEvent ev)
+        {
+            var focused = CurrentFocus;
+            bool customEntryRendererFocused = focused != null && focused.Parent is CustomEntryRenderer;
+
+            _lieAboutCurrentFocus = customEntryRendererFocused;
+            var result = base.DispatchTouchEvent(ev);
+            _lieAboutCurrentFocus = false;
+            return result;
+        }
+
+        public override Android.Views.View CurrentFocus
+        {
+            get
+            {
+                if (_lieAboutCurrentFocus)
+                {
+                    return null;
+                }
+                
+
+                return base.CurrentFocus;
             }
         }
     }

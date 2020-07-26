@@ -73,7 +73,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\KeyboardService.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

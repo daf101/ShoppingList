@@ -2,6 +2,7 @@
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
 using ShoppingList.Helpers;
+using ShoppingList.Interfaces;
 using ShoppingList.Model;
 using ShoppingList.ViewModel;
 using System;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -33,9 +35,20 @@ namespace ShoppingList
             {
                 Navigation.PopPopupAsync();
             });
-            //MessagingCenter.Subscribe<App>((App))
 
-            
+            // When below message is recieved, refocus keyboard
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.REFOCUS_KEYBOARD, (sender) =>
+            {
+                Thread.Sleep(1000);
+                //refocus();
+
+                var keyboard = DependencyService.Get<IKeyboardService>();
+                keyboard.ShowKeyboard();
+
+
+            });
+
+
         }
 
         protected override void OnAppearing()
@@ -43,7 +56,7 @@ namespace ShoppingList
             // Requesting all open undo pops to close:
             try
             {
-                MessagingCenter.Send<App>((App)Application.Current, Constants.REQUEST_UNDO_POPUP_CLOSE);
+                //MessagingCenter.Send<App>((App)Application.Current, Constants.REQUEST_UNDO_POPUP_CLOSE);
             }
             catch
             {
@@ -67,6 +80,5 @@ namespace ShoppingList
             int itemNameEntryLength = itemNameEntry.Text.Length;
             itemNameEntry.CursorPosition = itemNameEntryLength;
         }
-
     }
 }

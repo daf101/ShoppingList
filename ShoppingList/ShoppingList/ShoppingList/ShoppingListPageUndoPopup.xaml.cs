@@ -2,6 +2,7 @@
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using ShoppingList.Helpers;
+using ShoppingList.Interfaces;
 using ShoppingList.Model;
 using System;
 using System.Threading;
@@ -17,6 +18,7 @@ namespace ShoppingList
         public int currentPopupPosition;
         public int margin;
         public int popupOnSwitch;
+        private bool keyboardOpen;
         Item ClosedItem;
         public ShoppingListPageUndoPopup(Item closedItem)
         {
@@ -59,7 +61,7 @@ namespace ShoppingList
                         popupOnSwitch = 0;
                         Navigation.RemovePopupPageAsync(this);
                     }
-                    catch
+                    catch (Exception e)
                     {
                         // Page removal failed due to already being removed (It's fine, this code runs after the popup is removed for some reason):
                     }
@@ -86,7 +88,20 @@ namespace ShoppingList
             //InformationLabel.Text = currentPopupPosition.ToString();
             InformationLabel.Text = ClosedItem.Name + " deleted successfully.";
             popupOnSwitch = 1;
+
             
+            
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            if (checkKeyboard())
+            {
+                MessagingCenter.Send<App>((App)Application.Current, Constants.REFOCUS_KEYBOARD);
+
+            }
         }
 
         private async void UndoButton_Clicked(object sender, EventArgs e)
@@ -103,6 +118,12 @@ namespace ShoppingList
         {
             margin = popupPosition * 45;
             PopupPageStackLayout.Margin = new Thickness(0, 0, 0, margin);
+        }
+
+        private bool checkKeyboard()
+        {
+            var keyboard = DependencyService.Get<IKeyboardService>();
+            return keyboard.checkKeyboard();
         }
     }
 }

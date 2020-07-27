@@ -45,5 +45,7 @@ namespace ShoppingList.Helpers
 
         public const string CLOSE_ALL_UNDO_POPUPS = "CloseAllUndoPopups";
 
+        public const string REFRESH_SHOPPING_LIST = "RefreshShoppingList";
+
     }
 }

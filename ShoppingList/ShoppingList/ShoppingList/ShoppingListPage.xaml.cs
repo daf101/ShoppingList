@@ -49,6 +49,12 @@ namespace ShoppingList
                 itemListView.ItemsSource = items;
             });
 
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.REFRESH_SHOPPING_LIST, async (sender) =>
+            {
+                var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
+                itemListView.ItemsSource = items;
+            });
+
             MessagingCenter.Subscribe<ItemDetailVM,Item>(this,Constants.ITEM_DELETED, (sender, deletedItem) => {
                 Navigation.PushPopupAsync(new ShoppingListPageUndoPopup(deletedItem));
             });

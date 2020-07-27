@@ -1,6 +1,7 @@
 ﻿using Plugin.Toast;
 using Rg.Plugins.Popup.Services;
 using ShoppingList.Helpers;
+using ShoppingList.Interfaces;
 using ShoppingList.Model;
 using ShoppingList.ViewModel.Commands;
 using System;
@@ -81,6 +82,8 @@ namespace ShoppingList.ViewModel
             }
         }
 
+        private Item globalItemToDelete;
+
         public ItemDetailVM()
         {
             DeleteItemCommand = new DeleteItemCommand(this);
@@ -119,6 +122,7 @@ namespace ShoppingList.ViewModel
 
         public async void deleteItem(Item itemToDelete)
         {
+            globalItemToDelete = itemToDelete;
             itemToDelete.Active = 0;
             HttpResponseMessage response = await Item.Put(itemToDelete);
 
@@ -129,12 +133,15 @@ namespace ShoppingList.ViewModel
                 MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE);
 
                 // Letting previous page know item was deleted so user can undo if needed.
-                await PopupNavigation.Instance.PushAsync(new ShoppingListPageUndoPopup(itemToDelete));
+                DependencyService.Get<IUiService>()
+                    .ShowSnackBar(itemToDelete.Name + " was removed!", 5000,"UNDO", obj => undo());
+
+                //await PopupNavigation.Instance.PushAsync(new ShoppingListPageUndoPopup(itemToDelete));
                 //MessagingCenter.Send<ItemDetailVM,Item>(this,Constants.ITEM_DELETED, itemToDelete);
             }
             else
             {
-                // Error occured deleting item:
+                // Error occured deleting item: 
 
             }
         }
@@ -142,6 +149,22 @@ namespace ShoppingList.ViewModel
         public void closePopup()
         {
             MessagingCenter.Send<App>((App)Application.Current, Constants.CLOSE_ITEM_DETAIL_PAGE);
+        }
+
+        private async void undo()
+        {
+            globalItemToDelete.Active = 1;
+            var response = await Item.Put(globalItemToDelete);
+
+            if (response.IsSuccessStatusCode)
+            {
+                DependencyService.Get<IUiService>()
+                    .ShowSnackBar("Success", 500);
+                MessagingCenter.Send<App>((App)Application.Current, Constants.REFRESH_SHOPPING_LIST);
+            } else
+            {
+
+            }
         }
 
 

@@ -18,7 +18,6 @@ namespace ShoppingList
         public int currentPopupPosition;
         public int margin;
         public int popupOnSwitch;
-        private bool keyboardOpen;
         Item ClosedItem;
         public ShoppingListPageUndoPopup(Item closedItem)
         {
@@ -37,16 +36,15 @@ namespace ShoppingList
                 }
             });
 
-            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.REQUEST_UNDO_POPUP_CLOSE, async (sender) =>
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.REQUEST_UNDO_POPUP_CLOSE, (sender) =>
             {
 
-                await Navigation.RemovePopupPageAsync(this);
+                Navigation.RemovePopupPageAsync(this);
             });
 
             int count = 4;
             Device.StartTimer(new TimeSpan(0, 0, 1), () =>
             {
-
                 // Do something every 1 second:
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -73,10 +71,7 @@ namespace ShoppingList
                 {
                     return true;
                 }
-
-
             });
-
         }
 
         protected override void OnAppearing()
@@ -85,12 +80,8 @@ namespace ShoppingList
             var currentPopups = PopupNavigation.Instance.PopupStack;
             currentPopupPosition = currentPopups.Count;
             Adjust_Margin(currentPopupPosition);
-            //InformationLabel.Text = currentPopupPosition.ToString();
             InformationLabel.Text = ClosedItem.Name + " deleted successfully.";
             popupOnSwitch = 1;
-
-            
-            
         }
 
         protected override void OnDisappearing()

@@ -40,35 +40,24 @@ namespace ShoppingList
             MessagingCenter.Subscribe<App>((App)Application.Current, Constants.REFOCUS_KEYBOARD, (sender) =>
             {
                 Thread.Sleep(1000);
-                //refocus();
-
+                
                 var keyboard = DependencyService.Get<IKeyboardService>();
                 keyboard.ShowKeyboard();
-
-
             });
 
-
+            //Navigation.RemovePopupPageAsync(ShoppingListPageUndoPopup);
+            //Navigation.RemovePage(ShoppingListPageUndoPopup)
         }
-
         protected override void OnAppearing()
         {
-            // Requesting all open undo pops to close:
-            try
-            {
-                //MessagingCenter.Send<App>((App)Application.Current, Constants.REQUEST_UNDO_POPUP_CLOSE);
-            }
-            catch
-            {
-                // If there's an issue, not to worry.
-            }
+            // Bringing focus to item name entry:
             refocus();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-
+            // Letting other instances of Popup page know that this one will close so they can re-adjust margins
             MessagingCenter.Send<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED);
         }
 

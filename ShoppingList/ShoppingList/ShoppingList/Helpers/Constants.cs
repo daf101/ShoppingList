@@ -43,6 +43,7 @@ namespace ShoppingList.Helpers
 
         public const string REFOCUS_KEYBOARD = "RefocusKeyboard";
 
+        public const string CLOSE_ALL_UNDO_POPUPS = "CloseAllUndoPopups";
 
     }
 }

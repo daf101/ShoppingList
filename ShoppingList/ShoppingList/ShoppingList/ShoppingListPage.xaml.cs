@@ -1,6 +1,7 @@
 ﻿using Plugin.Toast;
 using Rg.Plugins.Popup.Extensions;
 using ShoppingList.Helpers;
+using ShoppingList.Interfaces;
 using ShoppingList.Model;
 using ShoppingList.ViewModel;
 using System;
@@ -97,6 +98,11 @@ namespace ShoppingList
             var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
             itemListView.ItemsSource = items;
             
+        }
+
+        private void btnOpenVPN_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<IOpenAppService>().OpenOpenVPN();
         }
     }
 }

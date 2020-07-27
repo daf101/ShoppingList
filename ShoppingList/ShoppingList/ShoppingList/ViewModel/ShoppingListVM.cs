@@ -125,7 +125,7 @@ namespace ShoppingList.ViewModel
                 // Display Empty View:
                 MessagingCenter.Send<App>((App)Application.Current, Constants.DISPLAY_EMPTY_VIEW);
             }
-            else if (items[0].Name.Contains("Unable to resolve host"))
+            else if (items[0].Name.Contains("Unable to resolve host") || items[0].Name.Contains("Unexpected character"))
             {
                 // Display network error:
                 MessagingCenter.Send<App>((App)Application.Current, Constants.DISPLAY_NETWORK_ERROR);

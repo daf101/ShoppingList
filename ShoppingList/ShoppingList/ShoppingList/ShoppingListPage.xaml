@@ -70,7 +70,11 @@
                            HorizontalOptions="Center"/>
                         <Label Text="Is your VPN connected maybe?"
                            HorizontalOptions="Center"/>
-                        <Label Text="Otherwise make sure you are connected"
+                        <Button x:Name="btnOpenVPN"
+                            Text="OpenVPN Client"
+                                Clicked="btnOpenVPN_Clicked"
+                                />
+                    <Label Text="Otherwise make sure you are connected"
                            HorizontalOptions="Center"/>
                         <Label Text=" to NotSoSlowInternet WiFi"
                            HorizontalOptions="Center"/>

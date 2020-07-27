@@ -47,5 +47,6 @@ namespace ShoppingList.Helpers
 
         public const string REFRESH_SHOPPING_LIST = "RefreshShoppingList";
 
+        public const string SELECT_MODE_TOGGLED = "SelectModeToggled";
     }
 }

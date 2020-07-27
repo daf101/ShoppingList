@@ -1,5 +1,6 @@
 ﻿using Plugin.Toast;
 using Rg.Plugins.Popup.Extensions;
+using ShoppingList.CustomTools.MultiSelectListView;
 using ShoppingList.Helpers;
 using ShoppingList.Interfaces;
 using ShoppingList.Model;
@@ -21,6 +22,7 @@ namespace ShoppingList
     public partial class ShoppingListPage : ContentPage
     {
         ShoppingListVM viewModel;
+        public SelectableObservableCollection<Item> Items { get; set; }
 
         public ShoppingListPage()
         {
@@ -35,25 +37,31 @@ namespace ShoppingList
             MessagingCenter.Subscribe<App>((App)Application.Current, Constants.POPUP_PAGE_FINISHED, async (sender) =>
             {
                 var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
-                itemListView.ItemsSource = items;
+                //itemListView.ItemsSource = items;
             });
             MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SORT_BY_DEFAULT_SELECTED, async (sender) =>
             {
                 Preferences.Set(Constants.SORT_BY, Constants.SORT_BY_DEFAULT);
                 var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
-                itemListView.ItemsSource = items;
+                //itemListView.ItemsSource = items;
             });
             MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SORT_BY_NAME_SELECTED, async (sender) =>
             {
                 Preferences.Set(Constants.SORT_BY, Constants.SORT_BY_NAME);
                 var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
-                itemListView.ItemsSource = items;
+                //itemListView.ItemsSource = items;
             });
 
             MessagingCenter.Subscribe<App>((App)Application.Current, Constants.REFRESH_SHOPPING_LIST, async (sender) =>
             {
                 var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
-                itemListView.ItemsSource = items;
+                //itemListView.ItemsSource = items;
+            });
+
+            MessagingCenter.Subscribe<App>((App)Application.Current, Constants.SELECT_MODE_TOGGLED, (sender) =>
+            {
+                // TO-DO:
+                //ItemSelectTick
             });
 
             MessagingCenter.Subscribe<ItemDetailVM,Item>(this,Constants.ITEM_DELETED, (sender, deletedItem) => {
@@ -81,23 +89,22 @@ namespace ShoppingList
                 itemListView.IsRefreshing = false;
             });
 
-            MessagingCenter.Subscribe<App, List<Item>>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE, (sender, items) =>
+            MessagingCenter.Subscribe<App, SelectableObservableCollection<Item>>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE, (sender, Items) =>
             {
                 itemListView.IsVisible = true;
                 noInternetRefreshView.IsVisible = false;
                 noInternetRefreshView.IsRefreshing = false;
                 emptyViewRefreshView.IsVisible = false;
                 itemListView.IsRefreshing = false;
-                itemListView.ItemsSource = items;
+                itemListView.ItemsSource = Items;
             });
+            
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            var items = await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
-            itemListView.ItemsSource = items;
-            
+            await viewModel.refresh(Preferences.Get(Constants.SORT_BY, Constants.SORT_BY_DEFAULT));
         }
 
         private void btnOpenVPN_Clicked(object sender, EventArgs e)

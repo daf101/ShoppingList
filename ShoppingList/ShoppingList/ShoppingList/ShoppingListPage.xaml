@@ -6,34 +6,38 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ShoppingList.ShoppingListPage"
-             xmlns:lv="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView" Padding="0,20,0,0"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls">
+             xmlns:ms="clr-namespace:ShoppingList.CustomTools.MultiSelectListView"
+             x:Class="ShoppingList.ShoppingListPage" Padding="0,0,0,0">
 
     <AbsoluteLayout>
-
+        <Switch IsToggled="{Binding EnableMultiSelect}"/>
         <ListView x:Name="itemListView" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  
                   SelectedItem="{Binding SelectedItem}"
-                  Margin="20,0"
+                  Margin="40"
                   HorizontalOptions="FillAndExpand"
                   IsPullToRefreshEnabled="True"
                   IsRefreshing="False"
-                  RefreshCommand="{Binding RefreshCommand}">
-                  
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid>
-                            <Label Text="{Binding Name}"
-                                   FontAttributes="Bold"
-                                   VerticalOptions="Center"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <RefreshView x:Name="emptyViewRefreshView" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0,0,1,1"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  ms:MultiSelectListView.IsMultiSelect="False">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ms:SelectableViewCell>
+
+                            <ms:SelectableViewCell.CheckView>
+                                <BoxView Color="Red" WidthRequest="12" HeightRequest="12" />
+                            </ms:SelectableViewCell.CheckView>
+                            
+                            <ms:SelectableViewCell.DataView>
+                                <Label Text="{Binding Name}"/>
+                            </ms:SelectableViewCell.DataView>
+                        </ms:SelectableViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <RefreshView x:Name="emptyViewRefreshView" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0,0,1,1"
                      IsVisible="False"
                      IsRefreshing="False"
                      IsEnabled="True"
@@ -90,7 +94,5 @@
                      HeightRequest="50"
                      WidthRequest="50"
                      Command="{Binding NewItemNavCommand}"/>
-        
-        
     </AbsoluteLayout>
 </ContentPage>

@@ -1,5 +1,6 @@
 ﻿using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
+using ShoppingList.CustomTools.MultiSelectListView;
 using ShoppingList.Helpers;
 using ShoppingList.Model;
 using ShoppingList.ViewModel.Commands;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ShoppingList.ViewModel
@@ -79,8 +81,11 @@ namespace ShoppingList.ViewModel
             }
         }
 
-        private Item selectedItem;
+        
 
+        public SelectableObservableCollection<Item> Items { get; private set; }
+
+        private Item selectedItem;
         public Item SelectedItem
         {
             get { return selectedItem; }
@@ -116,9 +121,10 @@ namespace ShoppingList.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Methods go here:
-        public async Task<List<Item>> refresh(string sortBy)
+        public async Task<SelectableObservableCollection<Item>> refresh(string sortBy)
         {
-            List<Item> items = await Item.GetItems(sortBy);
+            var items = await Item.GetItems(sortBy);
+            Items = new SelectableObservableCollection<Item>(items);
 
             if (items.Count == 0)
             {
@@ -133,11 +139,10 @@ namespace ShoppingList.ViewModel
             else
             {
                 // refresh Completed:
-                //MessagingCenter.Send<App>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE);
-                MessagingCenter.Send<App,List<Item>>((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE, items);
+                MessagingCenter.Send((App)Application.Current, Constants.LISTVIEW_REFRESH_COMPLETE, Items);
             }
 
-            return items;
+            return Items;
         }
 
         public async void item_Selected()
@@ -152,6 +157,5 @@ namespace ShoppingList.ViewModel
         {
             await PopupNavigation.Instance.PushAsync(new NewItemPage());
         }
-
     }
 }

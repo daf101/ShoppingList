@@ -13,11 +13,13 @@ namespace ShoppingList.ViewModel
     {
         public NavigationCommand NavCommand { get; set; }
         public SortByCommand SortByCmd { get; set; }
+        public SelectCommand SelectCmd { get; set; }
 
         public MainVM()
         {
             NavCommand = new NavigationCommand(this);
             SortByCmd = new SortByCommand(this);
+            SelectCmd = new SelectCommand(this);
         }
         public async void Navigate()
         {
@@ -38,6 +40,12 @@ namespace ShoppingList.ViewModel
                 MessagingCenter.Send<App>((App)Application.Current, Constants.SORT_BY_NAME_SELECTED);
             }
 
+        }
+
+        public void select()
+        {
+            // Need to tell list view to change mode:
+            MessagingCenter.Send<App>((App)Application.Current, Constants.SELECT_MODE_TOGGLED);
         }
     }
 

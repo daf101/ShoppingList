@@ -9,15 +9,21 @@
 
     <TabbedPage.ToolbarItems>
         
-        <ToolbarItem Text="Sort buy"                    
+        <ToolbarItem Text="Sort by"                    
                      IconImageSource="menu.png"
-                     Order="Primary"
+                     Order="Secondary"
                      Command="{Binding SortByCmd}"/>
+
+        <ToolbarItem Text="Select..."                    
+                     IconImageSource="menu.png"
+                     Order="Secondary"
+                     Command="{Binding SelectCmd}"/>
     </TabbedPage.ToolbarItems>
 
     <local:ShoppingListPage x:Name="ShoppingListTab"
                             Title="Shopping List"
                             Icon="list.png"
+                            BackgroundColor="White"
                             />
     <local:UserPage Title="User"
                     Icon="user.png"/>
